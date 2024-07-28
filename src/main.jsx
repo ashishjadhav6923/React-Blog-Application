@@ -11,15 +11,19 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import { AboutUs, Home, LogIn, Blog } from "./components";
+import Page404 from "./components/404.jsx";
+import SignUp from "./components/signUp.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
+      <Route path="*" element={<Page404 />} />
       <Route path="/" element={<Home />} />
-      <Route path="/about" element={<AboutUs />} />
+      <Route path="/About" element={<AboutUs />} />
       <Route path="/logIn" element={<LogIn />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/blog/:blogId" element={<Blog />} />
+      <Route path="/signIn" element={<SignUp />} />
+      <Route path="/Blogs" element={<Blog />} />
+      <Route path="/Blogs/:blogId" element={<Blog />} />
     </Route>
   )
 );

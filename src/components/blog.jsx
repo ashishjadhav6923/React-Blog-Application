@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 const Blog = () => {
   const { blogId } = useParams();
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="bg-whit">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-        <div className="max-w-screen-lg text-gray-500 sm:text-lg dark:text-gray-400">
-          <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900 dark:text-white">
+        <div className="max-w-screen-lg text-gray-500 sm:text-lg">
+          <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900">
             Powering innovation at{" "}
             <span className="font-extrabold">{blogId?blogId:"3,00,000+"}</span> companies worldwide
           </h2>
@@ -25,7 +25,7 @@ const Blog = () => {
           </p>
           <a
             href="#"
-            className="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700"
+            className="inline-flex items-center font-medium text-primary-600 hover:text-primary-800"
           >
             Learn more
             <svg

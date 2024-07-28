@@ -1,34 +1,44 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
-const Header = () => {
+import { navbar } from "../constants/constants";
+import logo from "../assets/BlogVerse Logo.svg";
+const Header = ({ loginSuccess }) => {
   return (
     <header className="sticky top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <NavLink to="/" className="flex items-center">
-            <img
-              src="https://flowbite.com/docs/images/logo.svg"
-              className="mr-3 h-6 sm:h-9"
-              alt="Flowbite Logo"
-            />
+            <img src={logo} className="mr-3 h-6 sm:h-9" alt="BlogVerse Logo" />
             <span className="self-center text-xl font-semibold whitespace-nowrap">
-              Flowbite
+              BlogVerse
             </span>
           </NavLink>
           <div className="flex items-center lg:order-2">
-            <NavLink
-              to="/logIn"
-              className={({isActive})=>`font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white ${isActive?"bg-blue-600 text-white":""}`}
-            >
-              Log in
-            </NavLink>
-            <NavLink
-              to="#"
-              className="bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-            >
-              Get started
-            </NavLink>
+            {!loginSuccess && (
+              <>
+                <NavLink
+                  to="/logIn"
+                  className={({ isActive }) =>
+                    `font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white ${
+                      isActive ? "bg-blue-600 text-white" : ""
+                    }`
+                  }
+                >
+                  Log in
+                </NavLink>
+                <NavLink
+                  to="/signIN"
+                  className={({ isActive }) =>
+                    `font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white ${
+                      isActive ? "bg-blue-600 text-white" : ""
+                    }`
+                  }
+                >
+                  Sign Up
+                </NavLink>
+              </>
+            )}
+
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -68,79 +78,21 @@ const Header = () => {
             id="mobile-menu-2"
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              <li>
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
-                      isActive ? "text-blue-600" : "text-black"
-                    }`
-                  }
-                  aria-current="page"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/about"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
-                      isActive ? "text-blue-600" : "text-black"
-                    }`
-                  }
-                >
-                  About Us
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/blog"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
-                      isActive ? "text-blue-600" : "text-black"
-                    }`
-                  }
-                >
-                  Blogs
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/Features"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
-                      isActive ? "text-blue-600" : "text-black"
-                    }`
-                  }
-                >
-                  Features
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/Team"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
-                      isActive ? "text-blue-600" : "text-black"
-                    }`
-                  }
-                >
-                  Team
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/Contact"
-                  className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
-                      isActive ? "text-blue-600" : "text-black"
-                    }`
-                  }
-                >
-                  Contact
-                </NavLink>
-              </li>
+              {navbar.map((item, index) => (
+                <li key={index}>
+                  <NavLink
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
+                        isActive ? "text-blue-600" : "text-black"
+                      }`
+                    }
+                    aria-current="page"
+                  >
+                    {item.Name}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
