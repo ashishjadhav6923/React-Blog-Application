@@ -1,9 +1,11 @@
-import React,{ useState } from "react";
-import logo from "../assets/BlogVerse Logo.svg"
+import React, { useContext, useState } from "react";
+import logo from "../assets/BlogVerse Logo.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Import axios
+import { logInContext } from "../context/logInContext";
 
 const LogIn = () => {
+  const {setloginSuccess,setprofileName} = useContext(logInContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -16,10 +18,16 @@ const LogIn = () => {
       });
       console.log(response.data);
       if (response.status === 200) {
+        setprofileName(username);
+        setloginSuccess(true);
         navigate("/"); // Redirect to home page if status is 201
       }
     } catch (error) {
-      console.error("There was an error!", error.response.data);
+      if (error.response) {
+        console.error("There was an error!", error.response.data);
+      } else {
+        console.error("There was an error!", error.message);
+      }
     }
   };
   return (
@@ -29,11 +37,7 @@ const LogIn = () => {
           href="#"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900"
         >
-          <img
-            className="w-8 h-8 mr-2"
-            src={logo}
-            alt="logo"
-          />
+          <img className="w-8 h-8 mr-2" src={logo} alt="logo" />
           BlogVerse
         </a>
         <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
@@ -41,7 +45,11 @@ const LogIn = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleLogin}>
+            <form
+              className="space-y-4 md:space-y-6"
+              action="#"
+              onSubmit={handleLogin}
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -54,7 +62,7 @@ const LogIn = () => {
                   name="email"
                   id="email"
                   value={username}
-                  onChange={(e)=>(setUsername(e.target.value))}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   placeholder="name@company.com"
                   required
@@ -72,7 +80,7 @@ const LogIn = () => {
                   name="password"
                   id="password"
                   value={password}
-                  onChange={(e)=>(setPassword(e.target.value))}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder=""
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                   required
@@ -89,10 +97,7 @@ const LogIn = () => {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="remember"
-                      className="text-gray-500"
-                    >
+                    <label htmlFor="remember" className="text-gray-500">
                       Remember me
                     </label>
                   </div>

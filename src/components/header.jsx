@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";
-const Header = ({ loginSuccess }) => {
+import { logInContext } from "../context/logInContext";
+import coolCat from "../assets/images/cool_cat.webp";
+const Header = () => {
+  const {loginSuccess} = useContext(logInContext);
   return (
     <header className="sticky top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -37,6 +40,15 @@ const Header = ({ loginSuccess }) => {
                   Sign Up
                 </NavLink>
               </>
+            )}
+            {loginSuccess && (
+              <NavLink to="/Profile">
+                <img
+                  className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 hover:scale-105 cursor-pointer"
+                  src={coolCat}
+                  alt="Bordered avatar"
+                />
+              </NavLink>
             )}
 
             <button
