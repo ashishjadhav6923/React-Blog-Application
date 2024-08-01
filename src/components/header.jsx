@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";
@@ -38,6 +38,30 @@ const Header = () => {
   }, []);
 
   const { loginSuccess } = useLogin();
+  const [isMenuVisible, setisMenuVisible] = useState(true);
+  const toggleMenu = () => {
+    setisMenuVisible(!isMenuVisible);
+  };
+  const [isMobile, setIsMobile] = useState(false);
+  const closeMenu = () => {
+    if (isMobile) {
+      setisMenuVisible(false);
+    }
+  };
+  const handleResize = () => {
+    if (window.innerWidth <= 1024) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <header className="sticky top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -54,7 +78,7 @@ const Header = () => {
                 <NavLink
                   to="/logIn"
                   className={({ isActive }) =>
-                    `font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white ${
+                    `font-medium rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white ${
                       isActive ? "bg-blue-600 text-white" : ""
                     }`
                   }
@@ -64,7 +88,7 @@ const Header = () => {
                 <NavLink
                   to="/signIN"
                   className={({ isActive }) =>
-                    `font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white ${
+                    `font-medium rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white ${
                       isActive ? "bg-blue-600 text-white" : ""
                     }`
                   }
@@ -89,6 +113,7 @@ const Header = () => {
               className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
               aria-controls="mobile-menu-2"
               aria-expanded="false"
+              onClick={toggleMenu}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -118,16 +143,23 @@ const Header = () => {
             </button>
           </div>
           <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+            className="justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul
+              className={`absolute bg-white bg-opacity-95 lg:bg-transparent lg:static flex flex-col w-full left-0 font-medium lg:flex-row lg:space-x-8 lg:mt-0 ${
+                isMenuVisible ? "block" : "hidden"
+              }`}
+            >
               {navbar.map((item, index) => (
-                <li key={index}>
+                <li
+                  key={index}
+                  onClick={closeMenu}
+                >
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
-                      `block py-2 pr-4 pl-3 border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
+                      `block py-2 pr-4 pl-3 text-center border-b border-gray-100 hover:text-blue-600 lg:border-0 lg:p-0 ${
                         isActive ? "text-blue-600" : "text-black"
                       }`
                     }
