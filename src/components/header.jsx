@@ -1,11 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";
 import { useLogin } from "../context/logInContext";
 import coolCat from "../assets/images/cool_cat.webp";
+import axios from "axios";
 const Header = () => {
-  const {loginSuccess} = useLogin();
+  const { setloginSuccess, setprofileName } = useLogin();
+  const tryLogin = async () => {
+    const usernameLocal = localStorage.getItem("username");
+    const passwordLocal = localStorage.getItem("password");
+    console.log("local storage : " + usernameLocal + " " + passwordLocal);
+    try {
+      const response = await axios.post("http://localhost:5000/api/login", {
+        username: usernameLocal,
+        password: passwordLocal,
+      });
+      console.log(response.data);
+      if (response.status === 200) {
+        setprofileName(usernameLocal);
+        setloginSuccess(true);
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("There was an error!", error.response.data);
+      } else {
+        console.error("There was an error!", error.message);
+      }
+    }
+  };
+  useEffect(() => {
+    if (localStorage.getItem("username") !== null) {
+      tryLogin();
+    } else {
+      console.log("NO local data");
+    }
+  }, []);
+
+  const { loginSuccess } = useLogin();
   return (
     <header className="sticky top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">

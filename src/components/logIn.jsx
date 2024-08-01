@@ -20,7 +20,9 @@ const LogIn = () => {
       if (response.status === 200) {
         setprofileName(username);
         setloginSuccess(true);
-        navigate("/"); // Redirect to home page if status is 201
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        navigate("/");
       }
     } catch (error) {
       if (error.response) {

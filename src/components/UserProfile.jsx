@@ -9,6 +9,8 @@ const UserProfile = () => {
 
   const handleLogOut = () => {
     setloginSuccess(false);
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
     navigate("/");
   };
   return (
