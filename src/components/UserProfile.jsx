@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import coolCat from "../assets/images/cool_cat.webp";
-import { logInContext } from "../context/logInContext";
+import { useLogin } from "../context/logInContext";
 import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { setloginSuccess,profileName } = useContext(logInContext);
+  const { setloginSuccess, profileName } = useLogin();
 
   const handleLogOut = () => {
     setloginSuccess(false);

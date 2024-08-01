@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";
-import { logInContext } from "../context/logInContext";
+import { useLogin } from "../context/logInContext";
 import coolCat from "../assets/images/cool_cat.webp";
 const Header = () => {
-  const {loginSuccess} = useContext(logInContext);
+  const {loginSuccess} = useLogin();
   return (
     <header className="sticky top-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">

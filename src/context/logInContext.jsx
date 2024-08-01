@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 const logInContext = React.createContext();
-
+const useLogin =()=>{
+  return useContext(logInContext)
+}
 const LogInContextProvider = ({ children }) => {
   const [loginSuccess, setloginSuccess] = useState(false);
   const [profileName, setprofileName] = useState("");
@@ -15,4 +17,4 @@ const LogInContextProvider = ({ children }) => {
 };
 
 export default LogInContextProvider;
-export { logInContext };
+export { useLogin };

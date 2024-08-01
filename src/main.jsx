@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import Layout from "./layout.jsx";
 import "./index.css";
 import {
   createBrowserRouter,
   RouterProvider,
   Route,
-  Link,
   createRoutesFromElements,
 } from "react-router-dom";
 import { AboutUs, Home, LogIn, Blog } from "./components";

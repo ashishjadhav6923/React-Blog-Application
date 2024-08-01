@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import logo from "../assets/BlogVerse Logo.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"; // Import axios
-import { logInContext } from "../context/logInContext";
+import { useLogin } from "../context/logInContext";
 
 const LogIn = () => {
-  const {setloginSuccess,setprofileName} = useContext(logInContext);
+  const {setloginSuccess,setprofileName} = useLogin();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
