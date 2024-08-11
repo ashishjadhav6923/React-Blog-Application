@@ -3,6 +3,6 @@ export const navbar = [
   { Name: "About", path: "/About" },
   { Name: "Blogs", path: "/Blogs" },
   { Name: "Categories", path: "/Categories" },
-  { Name: "Write a Blog", path: "/Write a Blog" },
+  { Name: "Write a Blog", path: "/Write-Blog" },
   { Name: "Authors", path: "/Authors" },
 ];
