@@ -29,20 +29,23 @@ const Header = () => {
       }
     }
   };
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("username") !== null) {
       tryLogin();
     } else {
       console.log("NO local data");
     }
-  }, []);
+    if (isMobile) {
+      setisMenuVisible(false);
+    }
+  }, [isMobile]);
 
   const { loginSuccess } = useLogin();
   const [isMenuVisible, setisMenuVisible] = useState(true);
   const toggleMenu = () => {
     setisMenuVisible(!isMenuVisible);
   };
-  const [isMobile, setIsMobile] = useState(false);
   const closeMenu = () => {
     if (isMobile) {
       setisMenuVisible(false);
@@ -152,10 +155,7 @@ const Header = () => {
               }`}
             >
               {navbar.map((item, index) => (
-                <li
-                  key={index}
-                  onClick={closeMenu}
-                >
+                <li key={index} onClick={closeMenu}>
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
