@@ -29,42 +29,19 @@ const Header = () => {
       }
     }
   };
-  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("username") !== null) {
       tryLogin();
     } else {
       console.log("NO local data");
     }
-    if (isMobile) {
-      setisMenuVisible(false);
-    }
-  }, [isMobile]);
+  }, []);
 
   const { loginSuccess } = useLogin();
-  const [isMenuVisible, setisMenuVisible] = useState(true);
+  const [isMenuVisible, setisMenuVisible] = useState(false);
   const toggleMenu = () => {
     setisMenuVisible(!isMenuVisible);
   };
-  const closeMenu = () => {
-    if (isMobile) {
-      setisMenuVisible(false);
-    }
-  };
-  const handleResize = () => {
-    if (window.innerWidth <= 1024) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  };
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   return (
     <header className="sticky top-0 border-b">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -150,12 +127,12 @@ const Header = () => {
             id="mobile-menu-2"
           >
             <ul
-              className={`absolute bg-white bg-opacity-95 lg:bg-transparent lg:static flex flex-col w-full left-0 font-medium lg:flex-row lg:space-x-8 lg:mt-0 ${
+              className={`absolute bg-white bg-opacity-95 lg:bg-transparent lg:static flex flex-col w-full left-0 font-medium lg:space-x-8 lg:mt-0 lg:flex lg:flex-row ${
                 isMenuVisible ? "block" : "hidden"
               }`}
             >
               {navbar.map((item, index) => (
-                <li key={index} onClick={closeMenu}>
+                <li key={index} onClick={toggleMenu}>
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
