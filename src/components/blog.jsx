@@ -1,46 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios"; // Make sure to import axios
 
 const Blog = () => {
+  const [blog, setBlog] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { blogId } = useParams();
+  const apiPath = `${import.meta.env.VITE_API_PATH}/api/readBlogs/${blogId}`;
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const response = await axios.get(apiPath);
+        setBlog(response.data.blog);
+        console.log(blog);
+      } catch (error) {
+        setError("Error fetching blog");
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlog();
+  }, [apiPath, blogId]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+  if (!blog) return <p>No blog found</p>;
+
   return (
-    <section className="bg-whit">
+    <section className="bg-white">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="max-w-screen-lg text-gray-500 sm:text-lg">
           <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900">
-            Powering innovation at{" "}
-            <span className="font-extrabold">{blogId?blogId:"3,00,000+"}</span> companies worldwide
+            {blog.title}
           </h2>
-          <p className="mb-4 font-light">
-            Track work across the enterprise through an open, collaborative
-            platform. Link issues across Jira and ingest data from other
-            software development tools, so your IT support and operations teams
-            have richer contextual information to rapidly respond to requests,
-            incidents, and changes.
-          </p>
-          <p className="mb-4 font-medium">
-            Deliver great service experiences fast - without the complexity of
-            traditional ITSM solutions. Accelerate critical development work,
-            eliminate toil, and deploy changes with ease.
-          </p>
-          <a
-            href="#"
-            className="inline-flex items-center font-medium text-primary-600 hover:text-primary-800"
-          >
-            Learn more
-            <svg
-              className="ml-1 w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </a>
+          <p className="mb-4 font-light">Author: {blog.author}</p>
+          <p className="mb-4 font-medium">{blog.content}</p>
+          {blog.additionalInfo && (
+            <p className="mb-4 inline-flex items-center font-medium">
+              Additional info: {blog.additionalInfo}
+            </p>
+          )}
+          <p className="mb-4 font-medium">Blog Id: {blog.id}</p>
         </div>
       </div>
     </section>

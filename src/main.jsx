@@ -8,7 +8,7 @@ import {
   Route,
   createRoutesFromElements,
 } from "react-router-dom";
-import { AboutUs, Home, LogIn, Blog } from "./components";
+import { AboutUs, Home, LogIn, Blog, BlogList} from "./components";
 import Page404 from "./components/404.jsx";
 import SignUp from "./components/signUp.jsx";
 import UserProfile from "./components/UserProfile.jsx";
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       <Route path="/About" element={<AboutUs />} />
       <Route path="/logIn" element={<LogIn />} />
       <Route path="/signIn" element={<SignUp />} />
-      <Route path="/Blogs" element={<Blog />} />
+      <Route path="/Blogs" element={<BlogList />} />
       <Route path="/Profile" element={<UserProfile />} />
       <Route path="/Write-Blog" element={<BlogWritingForm />} />
       <Route path="/Blogs/:blogId" element={<Blog />} />

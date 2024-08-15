@@ -6,5 +6,7 @@ import Header from "./header";
 import Hero from "./hero";
 import Home from "./Home";
 import LogIn from "./logIn";
+import BlogList from "./BlogList";
+import BlogCard from "./BlogCard";
 
-export {AboutUs,Features,Footer,Header,Hero,Home,LogIn,Blog};
+export {AboutUs,Features,Footer,Header,Hero,Home,LogIn,Blog,BlogList,BlogCard};

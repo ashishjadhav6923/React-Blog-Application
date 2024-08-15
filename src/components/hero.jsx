@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -32,7 +33,7 @@ const Hero = () => {
           Unleash Your Creativity, Share Your Story
         </h1>
         <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48">
-          oin our community of passionate writers and avid readers. Discover
+          join our community of passionate writers and avid readers. Discover
           captivating stories, share your unique voice, and connect with
           like-minded individuals. Start your journey with us today!
         </p>
@@ -55,12 +56,12 @@ const Hero = () => {
               ></path>
             </svg>
           </a>
-          <a
-            href="#"
+          <Link
+            to="/Blogs"
             className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100"
           >
             Read Blogs
-          </a>
+          </Link>
         </div>
         <div className="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
           <span className="font-semibold text-gray-400 uppercase">

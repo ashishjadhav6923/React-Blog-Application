@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid"; // Importing uuid for unique ID generation
 import { useLogin } from "../context/logInContext";
 
 // Validation schema using Yup
@@ -16,6 +17,7 @@ const BlogWritingForm = () => {
   let api_path = `${import.meta.env.VITE_API_PATH}/api/writeBlogs`;
   const { loginSuccess } = useLogin();
   const initialValues = {
+    id: "",
     title: "",
     author: "",
     profile: "",
@@ -23,19 +25,16 @@ const BlogWritingForm = () => {
     additionalInfo: "",
   };
   const { profileName } = useLogin();
-  // State to hold the success message
   const [successMessage, setSuccessMessage] = useState("");
 
-  // Submit handler
   const handleSubmit = async (values, { resetForm, setStatus, setErrors }) => {
     const formikErrors = {};
     if (loginSuccess) {
       values.profile = profileName;
+      values.id = uuidv4(); // Generate a unique ID for each submission
       try {
-        // Replace with your API endpoint
         const response = await axios.post(api_path, values);
 
-        // Check if the response status is 201 (Created)
         if (response.status === 201) {
           setSuccessMessage("Blog post created successfully!");
           resetForm(); // Clear the form fields after submission
@@ -47,7 +46,7 @@ const BlogWritingForm = () => {
     } else {
       formikErrors.general = "You need to Log in First";
       setErrors(formikErrors);
-      console.log("You need to Log in First")
+      console.log("You need to Log in First");
     }
   };
 
