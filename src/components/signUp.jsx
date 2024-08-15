@@ -6,6 +6,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
 const SignUp = () => {
+  let api_path=`${import.meta.env.VITE_API_PATH}/api/register`;
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -41,7 +42,7 @@ const SignUp = () => {
               onSubmit={async (values, { setErrors }) => {
                 try {
                   const response = await axios.post(
-                    "http://localhost:5000/api/register",
+                    api_path,
                     {
                       username: values.username,
                       password: values.password,

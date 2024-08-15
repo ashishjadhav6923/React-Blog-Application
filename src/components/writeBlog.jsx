@@ -13,7 +13,8 @@ const validationSchema = Yup.object({
 });
 
 const BlogWritingForm = () => {
-  // Initial values for the form
+  let api_path = `${import.meta.env.VITE_API_PATH}/api/writeBlogs`;
+  const { loginSuccess } = useLogin();
   const initialValues = {
     title: "",
     author: "",
@@ -26,23 +27,27 @@ const BlogWritingForm = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   // Submit handler
-  const handleSubmit = async (values, { resetForm, setStatus }) => {
-    values.profile = profileName;
-    try {
-      // Replace with your API endpoint
-      const response = await axios.post(
-        "http://localhost:5000/api/writeBlogs",
-        values
-      );
+  const handleSubmit = async (values, { resetForm, setStatus, setErrors }) => {
+    const formikErrors = {};
+    if (loginSuccess) {
+      values.profile = profileName;
+      try {
+        // Replace with your API endpoint
+        const response = await axios.post(api_path, values);
 
-      // Check if the response status is 201 (Created)
-      if (response.status === 201) {
-        setSuccessMessage("Blog post created successfully!");
-        resetForm(); // Clear the form fields after submission
+        // Check if the response status is 201 (Created)
+        if (response.status === 201) {
+          setSuccessMessage("Blog post created successfully!");
+          resetForm(); // Clear the form fields after submission
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        setSuccessMessage(""); // Clear success message if there's an error
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setSuccessMessage(""); // Clear success message if there's an error
+    } else {
+      formikErrors.general = "You need to Log in First";
+      setErrors(formikErrors);
+      console.log("You need to Log in First")
     }
   };
 
@@ -55,7 +60,7 @@ const BlogWritingForm = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, errors }) => (
             <Form className="space-y-4">
               <div>
                 <label
@@ -143,6 +148,11 @@ const BlogWritingForm = () => {
 
               {successMessage && (
                 <div className="mt-4 text-green-500">{successMessage}</div>
+              )}
+              {errors.general && (
+                <div className="text-red-500 text-sm mt-1">
+                  {errors.general}
+                </div>
               )}
             </Form>
           )}

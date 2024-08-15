@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { useLogin } from "../context/logInContext";
 
 const LogIn = () => {
+  let api_path=`${import.meta.env.VITE_API_PATH}/api/login`;
   const { setloginSuccess, setprofileName } = useLogin();
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const LogIn = () => {
               onSubmit={async (values, { setErrors }) => {
                 try {
                   const response = await axios.post(
-                    "http://localhost:5000/api/login",
+                    api_path,
                     {
                       username: values.username,
                       password: values.password,
