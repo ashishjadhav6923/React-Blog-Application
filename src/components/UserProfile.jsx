@@ -24,8 +24,7 @@ const UserProfile = () => {
 
     const fetchUserData = async () => {
       try {
-        const api_path = `${import.meta.env.VITE_API_PATH}/api/userInfo/${profileName}`;
-        const response = await axios.get(api_path);
+        const response = await axios.get(`/api/userInfo/${profileName}`);
         setUserData({
           name: response.data.userInfo.name,
           username: response.data.userInfo.username,

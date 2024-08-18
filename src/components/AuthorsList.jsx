@@ -9,7 +9,7 @@ const AuthorsList = () => {
   useEffect(() => {
     const fetchAuthors = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/authors`);
+        const response = await axios.get(`/api/authors`);
         setAuthors(response.data.authors);
       } catch (error) {
         setError("Error fetching authors");

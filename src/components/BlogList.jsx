@@ -3,7 +3,6 @@ import axios from "axios";
 import BlogCard from "./BlogCard";
 
 const BlogList = () => {
-  let api_path = `${import.meta.env.VITE_API_PATH}/api/readBlogs`;
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +10,7 @@ const BlogList = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(api_path);
+        const response = await axios.get("/api/readBlogs");
         setBlogs(response.data.blogs.reverse());
       } catch (error) {
         setError("Error fetching blogs");

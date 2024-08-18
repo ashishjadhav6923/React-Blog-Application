@@ -7,12 +7,11 @@ const Blog = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { blogId } = useParams();
-  const apiPath = `${import.meta.env.VITE_API_PATH}/api/readBlogs/${blogId}`;
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(apiPath);
+        const response = await axios.get(`/api/readBlogs/${blogId}`);
         setBlog(response.data.blog);
         console.log(blog);
       } catch (error) {
@@ -24,7 +23,7 @@ const Blog = () => {
     };
 
     fetchBlog();
-  }, [apiPath, blogId]);
+  }, [ blogId]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

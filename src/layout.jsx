@@ -6,14 +6,13 @@ import { useLogin } from "./context/logInContext";
 import axios from "axios";
 
 const Layout = () => {
-  let api_path = `${import.meta.env.VITE_API_PATH}/api/login`;
   const { setloginSuccess, setprofileName } = useLogin();
   const tryLogin = async () => {
     const usernameLocal = localStorage.getItem("username");
     const passwordLocal = localStorage.getItem("password");
     console.log("local storage : " + usernameLocal + " " + passwordLocal);
     try {
-      const response = await axios.post(api_path, {
+      const response = await axios.post("/api/login", {
         username: usernameLocal,
         password: passwordLocal,
       });

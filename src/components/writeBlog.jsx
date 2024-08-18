@@ -14,7 +14,6 @@ const validationSchema = Yup.object({
 });
 
 const BlogWritingForm = () => {
-  let api_path = `${import.meta.env.VITE_API_PATH}/api/writeBlogs`;
   const { loginSuccess } = useLogin();
   const initialValues = {
     id: "",
@@ -33,7 +32,7 @@ const BlogWritingForm = () => {
       values.profile = profileName;
       values.id = uuidv4(); // Generate a unique ID for each submission
       try {
-        const response = await axios.post(api_path, values);
+        const response = await axios.post("/api/writeBlogs", values);
 
         if (response.status === 201) {
           setSuccessMessage("Blog post created successfully!");
