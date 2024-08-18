@@ -6,16 +6,24 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
 const SignUp = () => {
-  let api_path=`${import.meta.env.VITE_API_PATH}/api/register`;
+  let api_path = `${import.meta.env.VITE_API_PATH}/api/register`;
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     username: Yup.string()
       .email("Invalid email format")
       .required("Email is required"),
-    password: Yup.string()
+      password: Yup.string()
       .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
+      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .matches(/\d/, "Password must contain at least one number")
+      .matches(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least one special character")
+      .required("Password is required"),    
+    name: Yup.string()
+      .min(4, "Name must be at least 4 characters")
+      .required("Name is required"),
+    profession: Yup.string().required("Profession is required"),
   });
 
   return (
@@ -37,17 +45,18 @@ const SignUp = () => {
               initialValues={{
                 username: "",
                 password: "",
+                name: "",
+                profession: "",
               }}
               validationSchema={validationSchema}
               onSubmit={async (values, { setErrors }) => {
                 try {
-                  const response = await axios.post(
-                    api_path,
-                    {
-                      username: values.username,
-                      password: values.password,
-                    }
-                  );
+                  const response = await axios.post(api_path, {
+                    username: values.username,
+                    password: values.password,
+                    name: values.name,
+                    profession: values.profession,
+                  });
                   console.log(response.data);
                   if (response.status === 201) {
                     navigate("/logIn");
@@ -71,9 +80,57 @@ const SignUp = () => {
                   <div>
                     <label
                       className="block mb-2 text-sm font-medium text-gray-900"
+                      htmlFor="name"
+                    >
+                      Name
+                    </label>
+                    <Field
+                      className={`bg-gray-50 border ${
+                        errors.name && touched.name
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      } text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5`}
+                      id="name"
+                      name="name"
+                      autoComplete="name"
+                      placeholder="Name"
+                    />
+                    {errors.name && touched.name ? (
+                      <div className="text-red-500 text-sm mt-1">
+                        {errors.name}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <label
+                      className="block mb-2 text-sm font-medium text-gray-900"
+                      htmlFor="profession"
+                    >
+                      Profession
+                    </label>
+                    <Field
+                      className={`bg-gray-50 border ${
+                        errors.profession && touched.profession
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      } text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5`}
+                      id="profession"
+                      name="profession"
+                      autoComplete="profession"
+                      placeholder="Profession"
+                    />
+                    {errors.profession && touched.profession ? (
+                      <div className="text-red-500 text-sm mt-1">
+                        {errors.profession}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <label
+                      className="block mb-2 text-sm font-medium text-gray-900"
                       htmlFor="username"
                     >
-                      Your email
+                      Email / Username
                     </label>
                     <Field
                       className={`bg-gray-50 border ${

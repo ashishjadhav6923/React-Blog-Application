@@ -8,11 +8,13 @@ import {
   Route,
   createRoutesFromElements,
 } from "react-router-dom";
-import { AboutUs, Home, LogIn, Blog, BlogList} from "./components";
+import { AboutUs, Home, LogIn, Blog, BlogList } from "./components";
 import Page404 from "./components/404.jsx";
 import SignUp from "./components/signUp.jsx";
 import UserProfile from "./components/UserProfile.jsx";
 import BlogWritingForm from "./components/writeBlog.jsx";
+import AuthorsList from "./components/AuthorsList.jsx";
+import LogInContextProvider from "./context/logInContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="/Blogs" element={<BlogList />} />
       <Route path="/Profile" element={<UserProfile />} />
       <Route path="/Write-Blog" element={<BlogWritingForm />} />
+      <Route path="/Authors" element={<AuthorsList />} />
       <Route path="/Blogs/:blogId" element={<Blog />} />
     </Route>
   )
@@ -32,6 +35,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <LogInContextProvider>
+      <RouterProvider router={router} />
+    </LogInContextProvider>
   </React.StrictMode>
 );
