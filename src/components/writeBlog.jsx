@@ -50,8 +50,8 @@ const BlogWritingForm = () => {
   };
 
   return (
-    <div className="h-screen">
-      <div className="max-w-4xl mx-auto p-6 my-4 bg-white rounded-lg shadow-md">
+    <div className="">
+      <div className="mx-auto p-6 my-4 rounded-lg">
         <h1 className="text-2xl font-semibold mb-4">Write a New Blog Post</h1>
         <Formik
           initialValues={initialValues}

@@ -2,7 +2,7 @@ import React from "react";
 
 const AuthorCard = ({ image, name, profession }) => {
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+    <div className="w-full max-w-sm border border-gray-200 rounded-lg shadow">
       <div className="flex flex-col items-center py-10">
         <img
           className="w-24 h-24 mb-3 rounded-full shadow-lg"
@@ -20,7 +20,7 @@ const AuthorCard = ({ image, name, profession }) => {
           </a>
           <a
             href="#"
-            className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
+            className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
           >
             Profile
           </a>

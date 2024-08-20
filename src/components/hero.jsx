@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="bg-white">
-      <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+    <section className="">
+      <div className="text-center lg:py-16">
         <a
           href="#"
           className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200"

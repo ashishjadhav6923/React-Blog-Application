@@ -37,11 +37,13 @@ const Layout = () => {
     }
   }, []);
   return (
-    <>
+    <div className="bg-gradient-to-b from-gray-100 via-white to-gray-100">
       <Header />
+      <div className="p-4 sm:py-6">
       <Outlet />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

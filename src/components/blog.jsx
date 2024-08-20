@@ -30,7 +30,7 @@ const Blog = () => {
   if (!blog) return <p>No blog found</p>;
 
   return (
-    <section className="bg-white">
+    <section className="">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="max-w-screen-lg text-gray-500 sm:text-lg">
           <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900">

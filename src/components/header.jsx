@@ -12,8 +12,8 @@ const Header = () => {
     setisMenuVisible(!isMenuVisible);
   };
   return (
-    <header className="sticky top-0 border-b">
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
+    <header className="sticky top-0 backdrop-blur-sm bg-white/80 border-b-slate-300 border-b">
+      <nav className="border-gray-200 px-4 lg:px-6 py-2.5">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <NavLink to="/" className="flex items-center">
             <img src={logo} className="mr-3 h-6 sm:h-9" alt="BlogVerse Logo" />
@@ -96,7 +96,7 @@ const Header = () => {
             id="mobile-menu-2"
           >
             <ul
-              className={`absolute bg-white bg-opacity-95 lg:bg-transparent lg:static flex flex-col w-full left-0 font-medium lg:space-x-8 lg:mt-0 lg:flex lg:flex-row ${
+              className={`absolute mt-3 bg-white bg-opacity-95 lg:bg-transparent lg:static flex flex-col w-full left-0 font-medium lg:space-x-8 lg:mt-0 lg:flex lg:flex-row ${
                 isMenuVisible ? "block" : "hidden"
               }`}
             >
