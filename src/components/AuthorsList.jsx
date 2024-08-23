@@ -30,6 +30,7 @@ const AuthorsList = () => {
           image={coolcat || author.img}
           name={author.name}
           profession={author.profession}
+          username={author.username}
         />
       ))}
     </div>

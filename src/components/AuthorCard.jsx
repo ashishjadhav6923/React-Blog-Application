@@ -1,6 +1,6 @@
 import React from "react";
 
-const AuthorCard = ({ image, name, profession }) => {
+const AuthorCard = ({ image, name, profession, username }) => {
   return (
     <div className="w-full max-w-sm border border-gray-200 rounded-lg shadow">
       <div className="flex flex-col items-center py-10">
@@ -13,13 +13,13 @@ const AuthorCard = ({ image, name, profession }) => {
         <span className="text-sm text-gray-500">{profession}</span>
         <div className="flex mt-4 md:mt-6">
           <a
-            href="#"
+            href={`/blogs/${username}`}
             className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
           >
             Read blogs
           </a>
           <a
-            href="#"
+            href={`/profiles/${username}`}
             className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100"
           >
             Profile

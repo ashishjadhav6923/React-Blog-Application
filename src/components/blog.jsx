@@ -36,7 +36,7 @@ const Blog = () => {
           <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900">
             {blog.title}
           </h2>
-          <p className="mb-4 font-light">Author: {blog.author}</p>
+          <p className="mb-4 font-light">Author: {blog.author.name}</p>
           <p className="mb-4 font-medium">{blog.content}</p>
           {blog.additionalInfo && (
             <p className="mb-4 inline-flex items-center font-medium">
