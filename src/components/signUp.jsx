@@ -12,13 +12,16 @@ const SignUp = () => {
     username: Yup.string()
       .email("Invalid email format")
       .required("Email is required"),
-      password: Yup.string()
+    password: Yup.string()
       .min(8, "Password must be at least 8 characters")
       .matches(/[a-z]/, "Password must contain at least one lowercase letter")
       .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
       .matches(/\d/, "Password must contain at least one number")
-      .matches(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least one special character")
-      .required("Password is required"),    
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least one special character"
+      )
+      .required("Password is required"),
     name: Yup.string()
       .min(4, "Name must be at least 4 characters")
       .required("Name is required"),
@@ -46,14 +49,16 @@ const SignUp = () => {
                 password: "",
                 name: "",
                 profession: "",
+                email: "",
               }}
               validationSchema={validationSchema}
               onSubmit={async (values, { setErrors }) => {
                 try {
                   const response = await axios.post("/api/register", {
-                    username: values.username,
-                    password: values.password,
                     name: values.name,
+                    username: values.username,
+                    email: values.username,
+                    password: values.password,
                     profession: values.profession,
                   });
                   console.log(response.data);
