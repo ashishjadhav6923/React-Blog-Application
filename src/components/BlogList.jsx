@@ -10,7 +10,7 @@ const BlogList = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("/api/readBlogs");
+        const response = await axios.get("/api/user/getBlogs");
         setBlogs(response.data.blogs.reverse());
       } catch (error) {
         setError("Error fetching blogs");

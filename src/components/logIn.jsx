@@ -12,8 +12,7 @@ const LogIn = () => {
 
   const validationSchema = Yup.object({
     username: Yup.string()
-      .email("Invalid email format")
-      .required("Email is required"),
+      .required("Email/Username is required"),
     password: Yup.string()
       .min(8, "Password must be at least 8 characters")
       .required("Password is required"),
@@ -43,7 +42,7 @@ const LogIn = () => {
               onSubmit={async (values, { setErrors }) => {
                 try {
                   const response = await axios.post(
-                    "/api/login",
+                    "/api/user/login",
                     {
                       username: values.username,
                       password: values.password,
@@ -78,7 +77,7 @@ const LogIn = () => {
                       className="block mb-2 text-sm font-medium text-gray-900"
                       htmlFor="username"
                     >
-                      Your email
+                      Your email / Username
                     </label>
                     <Field
                       className={`bg-gray-50 border ${

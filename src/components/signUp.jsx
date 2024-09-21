@@ -9,7 +9,8 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
-    username: Yup.string()
+    username:Yup.string().required("Username is required"),
+    email: Yup.string()
       .email("Invalid email format")
       .required("Email is required"),
     password: Yup.string()
@@ -54,10 +55,10 @@ const SignUp = () => {
               validationSchema={validationSchema}
               onSubmit={async (values, { setErrors }) => {
                 try {
-                  const response = await axios.post("/api/register", {
+                  const response = await axios.post("/api/user/register", {
                     name: values.name,
                     username: values.username,
-                    email: values.username,
+                    email: values.email,
                     password: values.password,
                     profession: values.profession,
                   });
@@ -65,10 +66,12 @@ const SignUp = () => {
                   if (response.status === 201) {
                     navigate("/logIn");
                   }
+                  // if(response.status === 401){
+                  //   formikErrors.general=response
+                  // }
                 } catch (error) {
+                  const formikErrors = {};
                   if (error.response && error.response.data) {
-                    const formikErrors = {};
-
                     // Set the general error message returned by the API
                     formikErrors.general = error.response.data.message;
 
@@ -132,9 +135,33 @@ const SignUp = () => {
                   <div>
                     <label
                       className="block mb-2 text-sm font-medium text-gray-900"
+                      htmlFor="email"
+                    >
+                      Email
+                    </label>
+                    <Field
+                      className={`bg-gray-50 border ${
+                        errors.email && touched.email
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      } text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5`}
+                      id="email"
+                      name="email"
+                      autoComplete="email"
+                      placeholder="Email"
+                    />
+                    {errors.email && touched.email ? (
+                      <div className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <label
+                      className="block mb-2 text-sm font-medium text-gray-900"
                       htmlFor="username"
                     >
-                      Email / Username
+                      Username
                     </label>
                     <Field
                       className={`bg-gray-50 border ${
@@ -145,7 +172,7 @@ const SignUp = () => {
                       id="username"
                       name="username"
                       autoComplete="username"
-                      placeholder="username"
+                      placeholder="Username"
                     />
                     {errors.username && touched.username ? (
                       <div className="text-red-500 text-sm mt-1">

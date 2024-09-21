@@ -9,7 +9,7 @@ const AuthorsList = () => {
   useEffect(() => {
     const fetchAuthors = async () => {
       try {
-        const response = await axios.get(`/api/authors`);
+        const response = await axios.get(`/api/user/authors`);
         setAuthors(response.data.authors);
       } catch (error) {
         setError("Error fetching authors");

@@ -32,7 +32,7 @@ const BlogWritingForm = () => {
       values.id = uuidv4(); // Generate a unique ID for each submission
 
       try {
-        const response = await axios.post("/api/writeBlogs", {
+        const response = await axios.post("/api/user/writeBlog", {
           id: values.id,
           title: values.title,
           profile: values.profile,
