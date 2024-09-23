@@ -38,7 +38,6 @@ const SignUp = () => {
         .required("Name is required"),
       profession: Yup.string().required("Profession is required"),
       img: Yup.mixed()
-        .required("Image is required")
         .test(
           "fileType",
           "Unsupported file format. Please upload an image (jpg, jpeg, png)",

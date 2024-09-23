@@ -12,18 +12,19 @@ const Header = () => {
     setisMenuVisible(!isMenuVisible);
   };
   const [userImgLink, setuserImgLink] = useState("");
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`/api/user/userInfo/${profileName}`);
-        setuserImgLink(response.data.userInfo.img);
-      } catch (error) {
-        setError("Error fetching userData");
-        console.error(error);
-      }
-    };
-    fetchUserData();
-  }, [profileName]);
+  if (loginSuccess) {
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          const response = await axios.get(`/api/user/userInfo/${profileName}`);
+          setuserImgLink(response.data.userInfo.img);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchUserData();
+    }, [profileName]);
+  }
 
   return (
     <header className="sticky top-0 backdrop-blur-sm bg-white/80 border-b-slate-300 border-b">
