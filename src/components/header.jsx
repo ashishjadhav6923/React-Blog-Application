@@ -12,8 +12,9 @@ const Header = () => {
     setisMenuVisible(!isMenuVisible);
   };
   const [userImgLink, setuserImgLink] = useState("");
-  if (loginSuccess) {
-    useEffect(() => {
+
+  useEffect(() => {
+    if (loginSuccess) {
       const fetchUserData = async () => {
         try {
           const response = await axios.get(`/api/user/userInfo/${profileName}`);
@@ -23,8 +24,8 @@ const Header = () => {
         }
       };
       fetchUserData();
-    }, [profileName]);
-  }
+    }
+  }, [profileName]);
 
   return (
     <header className="sticky top-0 backdrop-blur-sm bg-white/80 border-b-slate-300 border-b">

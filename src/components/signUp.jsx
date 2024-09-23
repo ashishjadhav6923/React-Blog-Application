@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import coolCat from "../assets/images/cool_cat.webp";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -38,14 +39,21 @@ const SignUp = () => {
         .required("Name is required"),
       profession: Yup.string().required("Profession is required"),
       img: Yup.mixed()
+        .nullable()
         .test(
           "fileType",
           "Unsupported file format. Please upload an image (jpg, jpeg, png)",
           (value) => {
-            return (
-              value &&
-              ["image/jpeg", "image/png", "image/jpg"].includes(value.type)
-            );
+            // Only validate file type if a file is selected
+            if (!value) {
+              return true; // No file selected, so pass validation
+            }
+            return [
+              "image/jpeg",
+              "image/png",
+              "image/jpg",
+              "image/webp",
+            ].includes(value.type);
           }
         ),
     }),
@@ -58,7 +66,7 @@ const SignUp = () => {
         formData.append("email", values.email);
         formData.append("password", values.password);
         formData.append("profession", values.profession);
-        formData.append("img", values.img); // Append the image file
+        formData.append("img", values.img ? values.img : ""); // Append the image file
 
         // Submit data to the backend API
         const response = await axios.post("/api/user/register", formData, {
@@ -253,7 +261,12 @@ const SignUp = () => {
                   type="file"
                   accept="image/jpeg, image/png"
                   onChange={(event) => {
-                    formik.setFieldValue("img", event.currentTarget.files[0]);
+                    formik.setFieldValue(
+                      "img",
+                      event.currentTarget.files[0]
+                        ? event.currentTarget.files[0]
+                        : coolCat
+                    );
                   }}
                 />
                 {formik.errors.img && formik.touched.img ? (
