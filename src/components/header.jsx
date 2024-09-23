@@ -3,14 +3,28 @@ import { NavLink } from "react-router-dom";
 import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";
 import { useLogin } from "../context/logInContext";
-import coolCat from "../assets/images/cool_cat.webp";
+import axios from "axios";
 const Header = () => {
-
+  const { profileName } = useLogin();
   const { loginSuccess } = useLogin();
   const [isMenuVisible, setisMenuVisible] = useState(false);
   const toggleMenu = () => {
     setisMenuVisible(!isMenuVisible);
   };
+  const [userImgLink, setuserImgLink] = useState("");
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`/api/user/userInfo/${profileName}`);
+        setuserImgLink(response.data.userInfo.img);
+      } catch (error) {
+        setError("Error fetching userData");
+        console.error(error);
+      }
+    };
+    fetchUserData();
+  }, [profileName]);
+
   return (
     <header className="sticky top-0 backdrop-blur-sm bg-white/80 border-b-slate-300 border-b">
       <nav className="border-gray-200 px-4 lg:px-6 py-2.5">
@@ -50,7 +64,7 @@ const Header = () => {
               <NavLink to="/Profile">
                 <img
                   className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 hover:scale-105 cursor-pointer"
-                  src={coolCat}
+                  src={`${import.meta.env.VITE_API_PATH_LOCAL}${userImgLink}`}
                   alt="Bordered avatar"
                 />
               </NavLink>
