@@ -12,7 +12,7 @@ const Layout = () => {
     const passwordLocal = localStorage.getItem("password");
     console.log("local storage : " + usernameLocal + " " + passwordLocal);
     try {
-      const response = await axios.post("/api/user/login", {
+      const response = await axios.post(`${import.meta.env.VITE_API_PATH}/api/user/login`, {
         username: usernameLocal,
         password: passwordLocal,
       });

@@ -17,7 +17,7 @@ const Header = () => {
     if (loginSuccess) {
       const fetchUserData = async () => {
         try {
-          const response = await axios.get(`/api/user/userInfo/${profileName}`);
+          const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/user/userInfo/${profileName}`);
           setuserImgLink(response.data.userInfo.img);
         } catch (error) {
           console.error(error);

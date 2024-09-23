@@ -69,7 +69,7 @@ const SignUp = () => {
         formData.append("img", values.img ? values.img : ""); // Append the image file
 
         // Submit data to the backend API
-        const response = await axios.post("/api/user/register", formData, {
+        const response = await axios.post(`${import.meta.env.VITE_API_PATH}/api/user/register`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

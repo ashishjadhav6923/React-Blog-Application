@@ -11,7 +11,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`/api/user/readBlog/${blogId}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/user/readBlog/${blogId}`);
         setBlog(response.data.blog);
         console.log(blog);
       } catch (error) {

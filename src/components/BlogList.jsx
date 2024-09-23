@@ -10,7 +10,7 @@ const BlogList = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("/api/user/getBlogs");
+        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/user/getBlogs`);
         setBlogs(response.data.blogs.reverse());
       } catch (error) {
         setError("Error fetching blogs");

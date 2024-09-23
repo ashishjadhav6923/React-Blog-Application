@@ -42,7 +42,7 @@ const LogIn = () => {
               onSubmit={async (values, { setErrors }) => {
                 try {
                   const response = await axios.post(
-                    "/api/user/login",
+                    `${import.meta.env.VITE_API_PATH}/api/user/login`,
                     {
                       username: values.username,
                       password: values.password,
