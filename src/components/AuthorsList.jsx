@@ -27,7 +27,7 @@ const AuthorsList = () => {
       {authors.map((author, index) => (
         <AuthorCard
           key={index}
-          image={coolcat || author.img}
+          image={author.img}
           name={author.name}
           profession={author.profession}
           username={author.username}
