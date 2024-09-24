@@ -16,7 +16,7 @@ const UserProfile = () => {
     <section className="flex flex-col py-4 items-center justify-center">
       <section className="w-fit mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg h-fit flex items-center justify-center flex-col gap-2">
         <div className="w-fit mx-auto">
-          <img src={`${import.meta.env.VITE_API_PATH}${userData.img}`} className="rounded-full w-28" alt="profile" />
+          <img src={userData.img} className="rounded-full w-28" alt="profile" />
         </div>
         <div className="mt-8 text-white">
           <h2 className="font-bold text-2xl tracking-wide">

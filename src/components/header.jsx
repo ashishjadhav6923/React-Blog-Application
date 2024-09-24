@@ -11,6 +11,9 @@ const Header = () => {
     setisMenuVisible(!isMenuVisible);
   };
   const [userImgLink, setuserImgLink] = useState(userData.img);
+  useEffect(() => {
+    setuserImgLink(userData.img);
+  }, [userData, loginSuccess]);
 
   return (
     <header className="sticky top-0 backdrop-blur-sm bg-white/80 border-b-slate-300 border-b">
@@ -51,7 +54,7 @@ const Header = () => {
               <NavLink to="/Profile">
                 <img
                   className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 hover:scale-105 cursor-pointer"
-                  src={`${import.meta.env.VITE_API_PATH}${userImgLink}`}
+                  src={userImgLink}
                   alt="Bordered avatar"
                 />
               </NavLink>
