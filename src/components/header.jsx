@@ -2,30 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";
-import { useLogin } from "../context/logInContext";
-import axios from "axios";
+import { useUserContext } from "../context/userDataContext";
+
 const Header = () => {
-  const { profileName } = useLogin();
-  const { loginSuccess } = useLogin();
+  const { userData, loginSuccess } = useUserContext();
   const [isMenuVisible, setisMenuVisible] = useState(false);
   const toggleMenu = () => {
     setisMenuVisible(!isMenuVisible);
   };
-  const [userImgLink, setuserImgLink] = useState("");
-
-  useEffect(() => {
-    if (loginSuccess) {
-      const fetchUserData = async () => {
-        try {
-          const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/user/userInfo/${profileName}`);
-          setuserImgLink(response.data.userInfo.img);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      fetchUserData();
-    }
-  }, [profileName]);
+  const [userImgLink, setuserImgLink] = useState(userData.img);
 
   return (
     <header className="sticky top-0 backdrop-blur-sm bg-white/80 border-b-slate-300 border-b">

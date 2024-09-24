@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid"; // Importing uuid for unique ID generation
-import { useLogin } from "../context/logInContext";
+import { useUserContext } from "../context/userDataContext";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -14,11 +14,11 @@ const validationSchema = Yup.object({
 });
 
 const BlogWritingForm = () => {
-  const { loginSuccess, profileName } = useLogin(); // Single useLogin call
+  const { loginSuccess, username } = useUserContext(); // Single useLogin call
   const initialValues = {
     id: "",
     title: "",
-    profile: "",
+    username: "",
     content: "",
     additionalInfo: "",
     category: "",
@@ -26,20 +26,25 @@ const BlogWritingForm = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [submitError, setSubmitError] = useState(""); // State to handle general submission errors
 
-  const handleSubmit = async (values, { resetForm, setErrors, setSubmitting }) => {
+  const handleSubmit = async (
+    values,
+    { resetForm, setErrors, setSubmitting }
+  ) => {
     if (loginSuccess) {
-      values.profile = profileName;
       values.id = uuidv4(); // Generate a unique ID for each submission
 
       try {
-        const response = await axios.post(`${import.meta.env.VITE_API_PATH}/api/user/writeBlog`, {
-          id: values.id,
-          title: values.title,
-          profile: values.profile,
-          content: values.content,
-          additionalInfo: values.additionalInfo,
-          category: values.category,
-        });
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_PATH}/api/user/writeBlog`,
+          {
+            id: values.id,
+            title: values.title,
+            username: username,
+            content: values.content,
+            additionalInfo: values.additionalInfo,
+            category: values.category,
+          }
+        );
 
         if (response.status === 201) {
           setSuccessMessage("Blog post created successfully!");
@@ -50,7 +55,10 @@ const BlogWritingForm = () => {
         }
       } catch (error) {
         console.error("Error submitting form:", error);
-        setSubmitError(error.response?.data?.message || "An error occurred while submitting the form."); // Handle submission error
+        setSubmitError(
+          error.response?.data?.message ||
+            "An error occurred while submitting the form."
+        ); // Handle submission error
       } finally {
         setSubmitting(false); // Re-enable the submit button
       }

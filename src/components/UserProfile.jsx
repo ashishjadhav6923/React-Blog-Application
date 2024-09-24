@@ -1,56 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import coolCat from "../assets/images/cool_cat.webp";
-import { useLogin } from "../context/logInContext";
-import axios from "axios";
+import { useUserContext } from "../context/userDataContext";
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { setloginSuccess, profileName } = useLogin();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [userData, setUserData] = useState({
-    name: "",
-    username: "",
-    profession: "",
-    img: "",
-  });
-
-  useEffect(() => {
-    if (!profileName) {
-      setLoading(false); // No need to load if profileName is not available
-      return;
-    }
-
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/user/userInfo/${profileName}`);
-        setUserData({
-          name: response.data.userInfo.name,
-          username: response.data.userInfo.username,
-          profession: response.data.userInfo.profession,
-          img: response.data.userInfo.img || coolCat, // Use coolCat if img is not provided
-        });
-      } catch (error) {
-        setError("Error fetching userData");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserData();
-  }, [profileName]); // Re-run the effect when profileName changes
-
+  const { setloginSuccess, username, userData } = useUserContext();
   const handleLogOut = () => {
     setloginSuccess(false);
     localStorage.removeItem("username");
     localStorage.removeItem("password");
     navigate("/");
   };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
 
   return (
     <section className="flex flex-col py-4 items-center justify-center">

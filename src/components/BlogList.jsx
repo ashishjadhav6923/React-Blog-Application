@@ -36,7 +36,7 @@ const BlogList = () => {
             id={blog.id}
             title={blog.title}
             author={blog.author.name}
-            username={blog.profile}
+            username={blog.username}
           />
         ))}
       </div>

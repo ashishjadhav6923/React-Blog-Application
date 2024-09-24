@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import { Outlet } from "react-router-dom";
-import { useLogin } from "./context/logInContext";
 import axios from "axios";
+import { useUserContext } from "./context/userDataContext";
 
 const Layout = () => {
-  const { setloginSuccess, setprofileName } = useLogin();
+  const { setloginSuccess, setUsername } = useUserContext();
   const tryLogin = async () => {
     const usernameLocal = localStorage.getItem("username");
     const passwordLocal = localStorage.getItem("password");
@@ -18,8 +18,8 @@ const Layout = () => {
       });
       console.log(response.data);
       if (response.status === 200) {
-        setprofileName(usernameLocal);
         setloginSuccess(true);
+        setUsername(usernameLocal)
       }
     } catch (error) {
       if (error.response) {

@@ -14,7 +14,7 @@ import SignUp from "./components/signUp.jsx";
 import UserProfile from "./components/UserProfile.jsx";
 import BlogWritingForm from "./components/writeBlog.jsx";
 import AuthorsList from "./components/AuthorsList.jsx";
-import LogInContextProvider from "./context/logInContext";
+import UserContextProvider from "./context/userDataContext.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,8 +35,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <LogInContextProvider>
+    <UserContextProvider>
       <RouterProvider router={router} />
-    </LogInContextProvider>
+    </UserContextProvider>
   </React.StrictMode>
 );

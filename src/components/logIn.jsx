@@ -4,10 +4,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { useLogin } from "../context/logInContext";
+import { useUserContext } from "../context/userDataContext";
 
 const LogIn = () => {
-  const { setloginSuccess, setprofileName } = useLogin();
+  const { setloginSuccess, setUsername } = useUserContext();
   const navigate = useNavigate();
 
   const validationSchema = Yup.object({
@@ -50,7 +50,7 @@ const LogIn = () => {
                   );
                   console.log(response.data);
                   if (response.status === 200) {
-                    setprofileName(values.username);
+                    setUsername(values.username);
                     setloginSuccess(true);
                     localStorage.setItem("username", values.username);
                     localStorage.setItem("password", values.password);
