@@ -43,7 +43,8 @@ const BlogWritingForm = () => {
             content: values.content,
             additionalInfo: values.additionalInfo,
             category: values.category,
-          }
+          },
+          { withCredentials: true }
         );
 
         if (response.status === 201) {
