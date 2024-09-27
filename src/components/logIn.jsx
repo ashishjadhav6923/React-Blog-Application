@@ -55,12 +55,12 @@ const LogIn = () => {
                   if (response.status === 200) {
                     setUserData((prevState) => ({
                       ...prevState,
-                      name: response.data.name,
-                      username: response.data.username,
-                      email: response.data.email,
-                      profession: response.data.profession,
-                      img: response.data.img,
-                      blogs: response.data.blogs,
+                      name: response.data.user.name,
+                      username: response.data.user.username,
+                      email: response.data.user.email,
+                      profession: response.data.user.profession,
+                      img: response.data.user.img,
+                      blogs: response.data.user.blogs,
                     }));
                     setloginSuccess(true);
                     navigate("/");
