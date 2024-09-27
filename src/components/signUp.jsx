@@ -5,10 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import coolCat from "../assets/images/cool_cat.webp";
+import { useUserContext } from "../context/userDataContext";
 
 const SignUp = () => {
+  const {loginSuccess} =useUserContext();
   const navigate = useNavigate();
-
+  if(loginSuccess){
+    navigate("/")
+  }
   // Formik configuration
   const formik = useFormik({
     initialValues: {

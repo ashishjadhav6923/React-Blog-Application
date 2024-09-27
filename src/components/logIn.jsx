@@ -7,12 +7,14 @@ import * as Yup from "yup";
 import { useUserContext } from "../context/userDataContext";
 
 const LogIn = () => {
-  const { setloginSuccess, setUsername } = useUserContext();
+  const { setloginSuccess, loginSuccess, setUserData } =
+    useUserContext();
   const navigate = useNavigate();
-
+  if (loginSuccess) {
+    navigate("/");
+  }
   const validationSchema = Yup.object({
-    username: Yup.string()
-      .required("Email/Username is required"),
+    username: Yup.string().required("Email/Username is required"),
     password: Yup.string()
       .min(8, "Password must be at least 8 characters")
       .required("Password is required"),
@@ -46,14 +48,21 @@ const LogIn = () => {
                     {
                       username: values.username,
                       password: values.password,
-                    }
+                    },
+                    { withCredentials: true }
                   );
-                  console.log(response.data);
+                  console.log("response after logIN :",response.data);
                   if (response.status === 200) {
-                    setUsername(values.username);
+                    setUserData((prevState) => ({
+                      ...prevState,
+                      name: response.data.name,
+                      username: response.data.username,
+                      email: response.data.email,
+                      profession: response.data.profession,
+                      img: response.data.img,
+                      blogs: response.data.blogs,
+                    }));
                     setloginSuccess(true);
-                    localStorage.setItem("username", values.username);
-                    localStorage.setItem("password", values.password);
                     navigate("/");
                   }
                 } catch (error) {

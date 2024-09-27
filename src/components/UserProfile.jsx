@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/userDataContext";
+import axios from "axios";
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { setloginSuccess, username, userData } = useUserContext();
-  const handleLogOut = () => {
-    setloginSuccess(false);
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-    navigate("/");
+  const { setloginSuccess, userData } = useUserContext();
+  const handleLogOut = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_PATH}/api/user/logout`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("logging out : ", response.data);
+      if (response.status === 200) {
+        setloginSuccess(false);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("There was an error!", error.message);
+    }
   };
 
   return (
