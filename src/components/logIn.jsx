@@ -59,7 +59,7 @@ const LogIn = () => {
                       username: response.data.user.username,
                       email: response.data.user.email,
                       profession: response.data.user.profession,
-                      img: response.data.user.img,
+                      img: response.data.user.img.replace("http://", "https://"),
                       blogs: response.data.user.blogs,
                     }));
                     setloginSuccess(true);
