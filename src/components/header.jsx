@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";

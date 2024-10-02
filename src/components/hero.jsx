@@ -1,14 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useUserContext } from "../context/userDataContext";
 
 const Hero = () => {
-  const {loginSuccess}=useUserContext();
+  const { loginSuccess } = useUserContext();
   return (
     <section className="">
       <div className="text-center lg:py-16">
-        <a
-          href="#"
+        <NavLink
+          to="#"
           className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200"
           role="alert"
         >
@@ -30,7 +30,7 @@ const Hero = () => {
               clipRule="evenodd"
             ></path>
           </svg>
-        </a>
+        </NavLink>
         <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl">
           Unleash Your Creativity, Share Your Story
         </h1>
@@ -40,8 +40,8 @@ const Hero = () => {
           like-minded individuals. Start your journey with us today!
         </p>
         <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-          <a
-            href={loginSuccess?'/Write-Blog':'/signIN'}
+          <NavLink
+            to={loginSuccess ? "/Write-Blog" : "/signIN"}
             className="inline-flex text-white justify-center items-center py-3 px-5 text-base font-medium text-center rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300"
           >
             Get Started
@@ -57,13 +57,13 @@ const Hero = () => {
                 clipRule="evenodd"
               ></path>
             </svg>
-          </a>
-          <Link
+          </NavLink>
+          <NavLink
             to="/Blogs"
             className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100"
           >
             Read Blogs
-          </Link>
+          </NavLink>
         </div>
         <div className="px-4 mx-auto text-center md:max-w-screen-md lg:max-w-screen-lg lg:px-36">
           <span className="font-semibold text-gray-400 uppercase">
