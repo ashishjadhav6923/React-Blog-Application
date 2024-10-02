@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../context/userDataContext";
 
 const Hero = () => {
+  const {loginSuccess}=useUserContext();
   return (
     <section className="">
       <div className="text-center lg:py-16">
@@ -39,7 +41,7 @@ const Hero = () => {
         </p>
         <div className="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
           <a
-            href="#"
+            href={loginSuccess?'/Write-Blog':'/signIN'}
             className="inline-flex text-white justify-center items-center py-3 px-5 text-base font-medium text-center rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300"
           >
             Get Started

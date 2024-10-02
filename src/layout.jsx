@@ -38,7 +38,7 @@ const Layout = () => {
   return (
     <div className="bg-gradient-to-b from-gray-100 via-white to-gray-100">
       <Header />
-      <div className="p-4 sm:py-6">
+      <div className="p-4 sm:py-6 min-h-screen">
         <Outlet />
       </div>
       <Footer />

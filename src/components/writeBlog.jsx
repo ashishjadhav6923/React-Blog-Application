@@ -7,10 +7,17 @@ import { useUserContext } from "../context/userDataContext";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
-  title: Yup.string().required("Title is required"),
-  content: Yup.string().required("Content is required"),
-  additionalInfo: Yup.string(),
-  category: Yup.string(),
+  title: Yup.string()
+    .max(100, "Title must be 100 characters or less")
+    .required("Title is required"),
+  content: Yup.string()
+    .max(10000, "Content must be 10,000 characters or less")
+    .required("Content is required"),
+  additionalInfo: Yup.string().max(
+    500,
+    "Additional information must be 500 characters or less"
+  ),
+  category: Yup.string().max(30, "Category must be 30 characters or less"),
 });
 
 const BlogWritingForm = () => {
@@ -71,7 +78,7 @@ const BlogWritingForm = () => {
   };
 
   return (
-    <div className="mx-auto p-6 my-4 rounded-lg">
+    <div className="max-w-screen-xl mx-auto min-h-96">
       <h1 className="text-2xl font-semibold mb-4">Write a New Blog Post</h1>
       <Formik
         initialValues={initialValues}
@@ -134,6 +141,11 @@ const BlogWritingForm = () => {
                 name="additionalInfo"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
+              <ErrorMessage
+                name="additionalInfo"
+                component="div"
+                className="text-red-500 text-sm"
+              />
             </div>
 
             <div>
@@ -148,6 +160,11 @@ const BlogWritingForm = () => {
                 id="category"
                 name="category"
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              />
+              <ErrorMessage
+                name="category"
+                component="div"
+                className="text-red-500 text-sm"
               />
             </div>
 

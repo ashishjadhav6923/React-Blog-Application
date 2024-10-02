@@ -10,7 +10,9 @@ const BlogList = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/user/getBlogs`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_PATH}/api/user/getBlogs`
+        );
         setBlogs(response.data.blogs.reverse());
       } catch (error) {
         setError("Error fetching blogs");
@@ -23,7 +25,8 @@ const BlogList = () => {
     fetchBlogs();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return <p className="max-w-screen-xl mx-auto min-h-96">Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -34,7 +37,11 @@ const BlogList = () => {
           <BlogCard
             key={blog.id}
             id={blog.id}
-            title={blog.title}
+            title={
+              blog.title.length > 60
+                ? blog.title.substring(0, 60) + "..."
+                : blog.title
+            }
             author={blog.author.name}
             username={blog.username}
           />

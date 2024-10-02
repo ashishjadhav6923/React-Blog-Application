@@ -9,6 +9,7 @@ export const useUserContext = () => useContext(UserContext);
 export const UserContextProvider = ({ children }) => {
   // State for login success
   const [loginSuccess, setloginSuccess] = useState(false);
+  const [signinSuccess, setsigninSuccess] = useState(false);
 
   // State for user data
   const [userData, setUserData] = useState({
@@ -27,6 +28,8 @@ export const UserContextProvider = ({ children }) => {
         setloginSuccess,
         userData,
         setUserData,
+        setsigninSuccess,
+        signinSuccess,
       }}
     >
       {children}

@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../assets/BlogVerse Logo.svg"
 const Footer = () => {
   return (
-    <footer className="p-4 sm:p-6">
+    <footer className="m-4 sm:p-6">
       <div className="mx-auto max-w-screen-xl">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">

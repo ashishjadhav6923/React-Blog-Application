@@ -11,7 +11,9 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_PATH}/api/user/readBlog/${blogId}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_PATH}/api/user/readBlog/${blogId}`
+        );
         setBlog(response.data.blog);
         console.log(blog);
       } catch (error) {
@@ -23,7 +25,7 @@ const Blog = () => {
     };
 
     fetchBlog();
-  }, [ blogId]);
+  }, [blogId]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -33,13 +35,13 @@ const Blog = () => {
     <section className="">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="max-w-screen-lg text-gray-500 sm:text-lg">
-          <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900">
+          <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900 whitespace-pre-wrap">
             {blog.title}
           </h2>
           <p className="mb-4 font-light">Author: {blog.author.name}</p>
-          <p className="mb-4 font-medium">{blog.content}</p>
+          <p className="mb-4 font-medium whitespace-pre-wrap">{blog.content}</p>
           {blog.additionalInfo && (
-            <p className="mb-4 inline-flex items-center font-medium">
+            <p className="mb-4 inline-flex items-center font-medium whitespace-pre-wrap">
               Additional info: {blog.additionalInfo}
             </p>
           )}
