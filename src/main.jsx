@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       <Route path="/Write-Blog" element={<BlogWritingForm />} />
       <Route path="/Authors" element={<AuthorsList />} />
       <Route path="/Blogs/:blogId" element={<Blog />} />
-      <Route path="/profiles/:username" element={<AuthorProfile />} />
+      <Route path="/Authors/profile/:username" element={<AuthorProfile />} />
     </Route>
   )
 );
