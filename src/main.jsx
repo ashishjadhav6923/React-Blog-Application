@@ -16,6 +16,7 @@ import BlogWritingForm from "./components/writeBlog.jsx";
 import AuthorsList from "./components/AuthorsList.jsx";
 import UserContextProvider from "./context/userDataContext.jsx";
 import AuthorProfile from "./components/authorProfile.jsx";
+import AuthorBlogList from "./components/AuthorBlogList.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="/logIn" element={<LogIn />} />
       <Route path="/signIn" element={<SignUp />} />
       <Route path="/Blogs" element={<BlogList />} />
+      <Route path="/Blogs/Author/:username" element={<AuthorBlogList />} />
       <Route path="/Profile" element={<UserProfile />} />
       <Route path="/Write-Blog" element={<BlogWritingForm />} />
       <Route path="/Authors" element={<AuthorsList />} />

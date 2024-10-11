@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import ScrollToTop from "./components/ScrollToTop";
 import { Outlet } from "react-router-dom";
 import axios from "axios";
 import { useUserContext } from "./context/userDataContext";
@@ -37,6 +38,7 @@ const Layout = () => {
 
   return (
     <div className="bg-gradient-to-b from-gray-100 via-white to-gray-100">
+      <ScrollToTop/>
       <Header />
       <div className="p-4 sm:py-6 min-h-screen">
         <Outlet />
