@@ -6,7 +6,7 @@ const Hero = () => {
   const { loginSuccess } = useUserContext();
   return (
     <section className="">
-      <div className="text-center lg:py-16">
+      <div className="text-center lg:py-16 my-6">
         <NavLink
           to="#"
           className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200"

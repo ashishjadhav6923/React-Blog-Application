@@ -26,11 +26,11 @@ const BlogList = () => {
   }, []);
 
   if (loading)
-    return <p className="max-w-screen-xl mx-auto min-h-96">Loading...</p>;
+    return <p className="max-w-screen-xl mx-auto">Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="max-w-screen-xl mx-auto min-h-96">
+    <div className="max-w-screen-xl mx-auto my-4">
       <h1 className="text-2xl font-semibold mb-4">Recent Blogs</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {blogs.map((blog) => (
@@ -42,7 +42,7 @@ const BlogList = () => {
                 ? blog.title.substring(0, 60) + "..."
                 : blog.title
             }
-            author={blog.author.name}
+            author={blog.author.name ? blog.author.name : ""}
             username={blog.username}
           />
         ))}
