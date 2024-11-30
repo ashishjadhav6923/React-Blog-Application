@@ -25,6 +25,8 @@ const Layout = () => {
           profession: response.data.user.profession,
           img: response.data.user.img,
           blogs: response.data.user.blogs,
+          ratings: response.data.user.ratings,
+          averageRating: response.data.user.averageRating,
         }));
         setloginSuccess(true);
       }

@@ -74,7 +74,7 @@ const UserProfile = () => {
                       <span className="mr-1">
                         <FaStar />
                       </span>
-                      5/10
+                      {userData.averageRating}/10
                     </p>
                     <p className="flex items-center mb-2 mr-5 text-secondary-dark hover:text-primary">
                       <span className="mr-1">
@@ -86,12 +86,6 @@ const UserProfile = () => {
                 </div>
                 <div className="flex md:flex-col md:gap-4 my-auto">
                   <Link
-                    to="#"
-                    className="font-medium rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white shadow-lg"
-                  >
-                    Give a Rating
-                  </Link>
-                  <Link
                     to={`/Blogs/Author/${userData.username}`}
                     className="font-medium rounded-lg text-sm px-2 lg:px-5 py-2 lg:py-2.5 mr-2 hover:bg-blue-600 hover:text-white shadow-lg"
                   >
@@ -102,7 +96,7 @@ const UserProfile = () => {
               <div className="flex flex-wrap justify-between">
                 <div className="flex flex-wrap items-center">
                   <p className="mr-3 mb-2 inline-flex items-center justify-center text-secondary-inverse rounded-lg bg-neutral-100 hover:bg-neutral-200 transition-all duration-200 ease-in-out px-3 py-1 text-sm font-medium leading-normal">
-                    Ratings: 320
+                    Ratings: {userData.ratings.length}
                   </p>
                   <Link
                     to={`/Blogs/Author/${userData.username}`}

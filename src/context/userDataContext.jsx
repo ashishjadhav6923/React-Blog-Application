@@ -19,6 +19,8 @@ export const UserContextProvider = ({ children }) => {
     profession: "",
     img: "",
     blogs: [],
+    averageRating: 0,
+    ratings: [],
   });
 
   return (
