@@ -5,11 +5,14 @@ import { FaLocationDot, FaStar } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
 import ReviewModal from "./ReviewModal";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 const AuthorProfile = () => {
   const { username } = useParams();
   const [userData, setUserData] = useState(null);
   const [error, seterror] = useState();
   const [loading, setloading] = useState(false);
+  const [reviewToggle, setreviewToggle] = useState(false);
   const getUserData = async () => {
     try {
       setloading(true);
@@ -26,6 +29,7 @@ const AuthorProfile = () => {
   };
   useEffect(() => {
     getUserData();
+    console.log("userDataa:",userData);
   }, [username]);
 
   const [toggleReview, settoggleReview] = useState(false);
@@ -55,7 +59,7 @@ const AuthorProfile = () => {
           toggleReview={toggleReview}
           toggleReviewModal={toggleReviewModal}
           Data={userData}
-          type='user'
+          type="user"
         />
       )}
       <div className="max-w-screen-xl mx-auto min-h-96">
@@ -65,7 +69,7 @@ const AuthorProfile = () => {
               <div className="mb-5 mr-5">
                 <div className="relative inline-block shrink-0 rounded-2xl">
                   <img
-                    className="inline-block shrink-0 rounded-2xl w-[80px] h-[80px] lg:w-[160px] lg:h-[160px]"
+                    className="inline-block shrink-0 rounded-2xl w-[80px] h-[80px] lg:w-[160px] lg:h-[160px] object-left-top object-cover"
                     src={userData.img}
                     alt="Author Avatar"
                   />
@@ -99,7 +103,7 @@ const AuthorProfile = () => {
                         <span className="mr-1">
                           <FaStar />
                         </span>
-                        {userData.averageRating}/10
+                        {userData.averageRating.toFixed(2)}/5
                       </p>
                       <p className="flex items-center mb-2 mr-5 text-secondary-dark hover:text-primary">
                         <span className="mr-1">
@@ -126,9 +130,9 @@ const AuthorProfile = () => {
                 </div>
                 <div className="flex flex-wrap justify-between">
                   <div className="flex flex-wrap items-center">
-                    <p className="mr-3 mb-2 inline-flex items-center justify-center text-secondary-inverse rounded-lg bg-neutral-100 hover:bg-neutral-200 transition-all duration-200 ease-in-out px-3 py-1 text-sm font-medium leading-normal">
+                    <button className="mr-3 mb-2 inline-flex items-center justify-center text-secondary-inverse rounded-lg bg-neutral-100 hover:bg-neutral-200 transition-all duration-200 ease-in-out px-3 py-1 text-sm font-medium leading-normal" onClick={()=>{setreviewToggle(!reviewToggle)}}>
                       Reviews: {userData.ratings.length}
-                    </p>
+                    </button>
                     <Link
                       to={`/Blogs/Author/${username}`}
                       className="mr-3 mb-2 inline-flex items-center justify-center text-secondary-inverse rounded-lg bg-neutral-100 hover:bg-neutral-200 transition-all duration-200 ease-in-out px-3 py-1 text-sm font-medium leading-normal"
@@ -142,6 +146,36 @@ const AuthorProfile = () => {
             <hr className="w-full h-px border-neutral-200" />
           </div>
         </div>
+        {reviewToggle && (
+          <div>
+            <p className="font-semibold text-[1.5rem] m-2">Reviews :</p>
+            {userData.ratings.map((rating,index) => {
+              return (
+                <div className="shadow-lg drop-shadow-xl flex flex-col sm:flex-row mb-6 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 h-fit w-fit justify-center sm:items-center max-w-5xl min-w-full sm:min-w-0" key={index}>
+                  <img
+                    className="shrink-0 rounded-2xl h-24 w-24 object-left-top object-cover m-2"
+                    src={rating.raterImg}
+                    alt={`${rating.raterName}'s Avatar`}
+                  />
+                  <div className="flex flex-col justify-center gap-2 p-4">
+                    <p>
+                      <span className="font-semibold">Name :</span>{" "}
+                      {rating.raterName}
+                    </p>
+                    <p className="text-justify">
+                      <span className="font-semibold">Message :</span>{" "}
+                      {rating.message}
+                    </p>
+                    <div className="flex">
+                      <span className="font-semibold">Rating : </span>
+                      <Rating style={{ maxWidth: 100 }} value={rating.rating} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </>
   );
