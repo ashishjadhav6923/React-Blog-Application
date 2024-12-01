@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import sendUserReview from "../utility/sendUserReview";
 import { useUserContext } from "../context/userDataContext";
+import sendBlogReview from "../utility/sendBlogReview";
 const ReviewModal = ({ toggleReview, toggleReviewModal, Data, type }) => {
   const { userData, loginSuccess } = useUserContext();
   const [isReviewSubmitting, setisReviewSubmitting] = useState(false);
@@ -43,12 +44,23 @@ const ReviewModal = ({ toggleReview, toggleReviewModal, Data, type }) => {
       const raterUsername = userData.username;
       const rating = values.rating;
       const message = values.message;
-      const res = await sendUserReview(
-        username,
-        raterUsername,
-        rating,
-        message
-      );
+      let res;
+      if(type=='user'){
+        res = await sendUserReview(
+          username,
+          raterUsername,
+          rating,
+          message
+        );
+      }
+      if(type=='blog'){
+        res = await sendBlogReview(
+          Data,
+          raterUsername,
+          rating,
+          message
+        );
+      }
       if (res===1) {
         setIsSuccessfullySubmitted(true);
         setisReviewSubmitting(false);

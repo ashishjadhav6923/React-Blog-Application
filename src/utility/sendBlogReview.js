@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const sendBlogReview = async (blogId, raterUsername, rating, message) => {
+const sendBlogReview = async (Data, raterUsername, rating, message) => {
   try {
     const response = await axios.post(
       `${import.meta.env.VITE_API_PATH}/api/user/rateBlog`,
       {
-        blogId,
+        id:Data.id,
         raterUsername,
         rating,
         message,
@@ -18,7 +18,7 @@ const sendBlogReview = async (blogId, raterUsername, rating, message) => {
     }
   } catch (error) {
     console.log("Error occurred while sending review", error);
-    return 0;
+    return error.response.data;
   }
 };
 

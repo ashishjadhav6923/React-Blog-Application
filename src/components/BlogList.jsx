@@ -44,6 +44,7 @@ const BlogList = () => {
             }
             author={blog.author.name ? blog.author.name : ""}
             username={blog.username}
+            rating={blog.averageRating.toFixed(2)}
           />
         ))}
       </div>
