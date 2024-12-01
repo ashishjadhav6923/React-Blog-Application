@@ -30,17 +30,22 @@ const AuthorsList = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-screen-xl mx-auto min-h-96">
-      {authors.map((author, index) => (
-        <AuthorCard
-          key={index}
-          name={author.name}
-          username={author.username}
-          profession={author.profession}
-          image={author.img}
-          blogs={author.blogs}
-        />
-      ))}
+    <div className="max-w-screen-xl mx-auto min-h-96">
+      <h1 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">
+        Write a New Blog Post
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
+        {authors.map((author, index) => (
+          <AuthorCard
+            key={index}
+            name={author.name}
+            username={author.username}
+            profession={author.profession}
+            image={author.img}
+            blogs={author.blogs}
+          />
+        ))}
+      </div>
     </div>
   );
 };

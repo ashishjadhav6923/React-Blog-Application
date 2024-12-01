@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../assets/BlogVerse Logo.svg"
 const Footer = () => {
   return (
-    <footer className="m-4 sm:p-6">
+    <footer className="p-4 sm:p-6">
       <div className="mx-auto max-w-screen-xl">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -24,7 +24,7 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-600">
                 <li className="mb-4">
-                  <a href="https://flowbite.com" className="hover:underline">
+                  <a href="" className="hover:underline">
                   BlogVerse
                   </a>
                 </li>
@@ -42,7 +42,7 @@ const Footer = () => {
               <ul className="text-gray-600">
                 <li className="mb-4">
                   <a
-                    href="https://github.com/themesberg/flowbite"
+                    href="https://github.com/ashishjadhav6923"
                     className="hover:underline "
                   >
                     Github
@@ -50,7 +50,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="https://discord.gg/4eeurUVvTy"
+                    href=""
                     className="hover:underline"
                   >
                     Discord
@@ -81,7 +81,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center">
             © 2022{" "}
-            <a href="https://flowbite.com" className="hover:underline">
+            <a href="" className="hover:underline">
             BlogVerse™
             </a>
             . All Rights Reserved.
@@ -135,7 +135,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://github.com/ashishjadhav6923"
               className="text-gray-500 hover:text-gray-900"
             >
               <svg

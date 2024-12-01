@@ -25,7 +25,6 @@ const Blog = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_API_PATH}/api/user/readBlog/${blogId}`
         );
-        console.log(response.data.blog);
         setBlog(response.data.blog);
       } catch (error) {
         setError("Error fetching blog");
@@ -96,7 +95,7 @@ const Blog = () => {
               </span>
             </div>
           </Link>
-          <p className="mb-4 font-medium whitespace-pre-wrap text-justify">
+          <p className="mb-4 font-medium whitespace-pre-wrap text-justify overflow-scroll">
             {blog.content}
           </p>
           {blog.additionalInfo && (

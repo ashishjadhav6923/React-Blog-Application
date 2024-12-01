@@ -79,7 +79,7 @@ const BlogWritingForm = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto min-h-96">
-      <h1 className="text-2xl font-semibold mb-4">Write a New Blog Post</h1>
+      <h1 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">Write a New Blog Post</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

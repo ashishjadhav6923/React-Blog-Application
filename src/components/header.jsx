@@ -1,10 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { navbar } from "../constants/constants";
+// import { navbar } from "../constants/constants";
 import logo from "../assets/BlogVerse Logo.svg";
 import { useUserContext } from "../context/userDataContext";
+import { TfiWrite } from "react-icons/tfi";
+import { PiReadCvLogoLight } from "react-icons/pi";
+import { FcAbout } from "react-icons/fc";
+import authorPng from "../assets/images/icons/author.png";
+import aboutPng from "../assets/images/icons/about.png";
+import { object } from "yup";
+import { BiCategory } from "react-icons/bi";
+import { HiOutlineHome } from "react-icons/hi";
 
 const Header = () => {
+  const navbar = [
+    { Name: "Home", path: "/", icon: <HiOutlineHome color="black" /> },
+    { Name: "About", path: "/About", icon: aboutPng },
+    {
+      Name: "Blogs",
+      path: "/Blogs",
+      icon: <PiReadCvLogoLight color="black" />,
+    },
+    {
+      Name: "Categories",
+      path: "/Categories",
+      icon: <BiCategory color="black" />,
+    },
+    {
+      Name: "Write a Blog",
+      path: "/Write-Blog",
+      icon: <TfiWrite color="black" />,
+    },
+    { Name: "Authors", path: "/Authors", icon: authorPng },
+  ];
   const { userData, loginSuccess } = useUserContext();
   const [isMenuVisible, setisMenuVisible] = useState(false);
   const toggleMenu = () => {
@@ -115,7 +143,14 @@ const Header = () => {
                     }
                     aria-current="page"
                   >
-                    {item.Name}
+                    <span className="flex items-center justify-center gap-2">
+                      {item.Name}
+                      {typeof item.icon == "object" ? (
+                        item.icon
+                      ) : (
+                        <img className="h-4" src={item.icon}></img>
+                      )}
+                    </span>
                   </NavLink>
                 </li>
               ))}
