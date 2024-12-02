@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import coolCat from "../assets/images/cool_cat.webp";
 import { useUserContext } from "../context/userDataContext";
-import {professions} from '../constants/constants.js'
+import { professions } from "../constants/constants.js";
 
 const SignUp = () => {
   const { loginSuccess, signinSuccess, setsigninSuccess } = useUserContext();
@@ -267,7 +267,9 @@ const SignUp = () => {
                   >
                     <option value="">--Please choose an option--</option>
                     {professions.sort().map((profession) => (
-                      <option value={`${profession}`}>{profession}</option>
+                      <option value={`${profession}`}>
+                        {profession.split("-").join(" ")}
+                      </option>
                     ))}
                     <option value="other">Other</option>
                   </select>

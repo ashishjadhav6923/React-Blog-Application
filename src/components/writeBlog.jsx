@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid"; // Importing uuid for unique ID generation
 import { useUserContext } from "../context/userDataContext";
+import { blogCategories } from "../constants/constants.js";
 
 // Validation schema using Yup
 const validationSchema = Yup.object({
@@ -17,7 +18,7 @@ const validationSchema = Yup.object({
     500,
     "Additional information must be 500 characters or less"
   ),
-  category: Yup.string().max(30, "Category must be 30 characters or less"),
+  category: Yup.string().required("Category is required"),
 });
 
 const BlogWritingForm = () => {
@@ -79,7 +80,9 @@ const BlogWritingForm = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto min-h-96">
-      <h1 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">Write a New Blog Post</h1>
+      <h1 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">
+        Write a New Blog Post
+      </h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -156,11 +159,20 @@ const BlogWritingForm = () => {
                 Category
               </label>
               <Field
-                type="text"
+                as="select"
+                className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                 id="category"
                 name="category"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
+                placeholder="category"
+              >
+                <option value={null}>--Please choose an option--</option>
+                {blogCategories.sort().map((profession) => (
+                  <option value={`${profession}`}>
+                    {profession.split("-").join(" ")}
+                  </option>
+                ))}
+                <option value="other">Other</option>
+              </Field>
               <ErrorMessage
                 name="category"
                 component="div"
