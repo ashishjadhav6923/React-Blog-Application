@@ -66,19 +66,17 @@ const AuthorsList = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
         {!topRatedFilter && authors
-          ? authors
-              .reverse()
-              .map((author, index) => (
-                <AuthorCard
-                  key={index}
-                  name={author.name}
-                  username={author.username}
-                  profession={author.profession}
-                  image={author.img}
-                  blogs={author.blogs}
-                  averageRating={author.averageRating}
-                />
-              ))
+          ? authors.map((author, index) => (
+              <AuthorCard
+                key={index}
+                name={author.name}
+                username={author.username}
+                profession={author.profession}
+                image={author.img}
+                blogs={author.blogs}
+                averageRating={author.averageRating}
+              />
+            ))
           : !topRatedFilter &&
             `Authors with profession ${param.category} not found`}
         {topRatedFilter && authors
