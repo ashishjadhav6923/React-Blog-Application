@@ -17,6 +17,7 @@ import AuthorsList from "./components/AuthorsList.jsx";
 import UserContextProvider from "./context/userDataContext.jsx";
 import AuthorProfile from "./components/authorProfile.jsx";
 import AuthorBlogList from "./components/AuthorBlogList.jsx";
+import Categories from "./components/Categories.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,9 @@ const router = createBrowserRouter(
       <Route path="/Authors" element={<AuthorsList />} />
       <Route path="/Blogs/:blogId" element={<Blog />} />
       <Route path="/Authors/profile/:username" element={<AuthorProfile />} />
+      <Route path="/Categories" element={<Categories />} />
+      <Route path="/Categories/Authors/:category" element={<AuthorsList />} />
+      <Route path="/Categories/Blogs/:category" element={<AuthorProfile />} />
     </Route>
   )
 );

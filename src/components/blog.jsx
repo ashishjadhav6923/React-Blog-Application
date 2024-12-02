@@ -119,7 +119,7 @@ const Blog = () => {
                 {!reviewToggle ? "see" : "close"} reviews
               </Link>
             </div>
-            {blog.ratings.map((rating, index) => {
+            {blog.ratings.length?blog.ratings.map((rating, index) => {
               return (
                 <div
                   className="shadow-lg drop-shadow-xl flex flex-col sm:flex-row mb-6 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 h-fit w-fit justify-center sm:items-center max-w-5xl min-w-full sm:min-w-0"
@@ -146,7 +146,7 @@ const Blog = () => {
                   </div>
                 </div>
               );
-            })}
+            }):<p className="m-2">No reviews</p>}
           </div>
         )}
       </div>

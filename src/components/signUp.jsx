@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import coolCat from "../assets/images/cool_cat.webp";
 import { useUserContext } from "../context/userDataContext";
+import {professions} from '../constants/constants.js'
 
 const SignUp = () => {
   const { loginSuccess, signinSuccess, setsigninSuccess } = useUserContext();
@@ -252,7 +253,7 @@ const SignUp = () => {
                   >
                     Profession
                   </label>
-                  <input
+                  <select
                     className={`bg-gray-50 border ${
                       formik.errors.profession && formik.touched.profession
                         ? "border-red-500"
@@ -263,7 +264,13 @@ const SignUp = () => {
                     placeholder="Profession"
                     onChange={formik.handleChange}
                     value={formik.values.profession}
-                  />
+                  >
+                    <option value="">--Please choose an option--</option>
+                    {professions.sort().map((profession) => (
+                      <option value={`${profession}`}>{profession}</option>
+                    ))}
+                    <option value="other">Other</option>
+                  </select>
                   {formik.errors.profession && formik.touched.profession ? (
                     <div className="text-red-500 text-sm mt-1">
                       {formik.errors.profession}

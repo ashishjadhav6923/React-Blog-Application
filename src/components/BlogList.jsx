@@ -30,7 +30,7 @@ const BlogList = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="max-w-screen-xl mx-auto my-4">
+    <div className="max-w-screen-xl mx-auto">
       <h1 className="text-3xl tracking-tight font-extrabold text-gray-900 mb-4">Recent Blogs</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {blogs.map((blog) => (
