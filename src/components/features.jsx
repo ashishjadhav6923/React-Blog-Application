@@ -3,7 +3,7 @@ import React from "react";
 const Features = () => {
   return (
     <section className="">
-      <div className="mx-auto max-w-screen-xl sm:py-16">
+      <div className="mx-auto max-w-screen-xl py-16">
         <div className="max-w-screen-md mb-8 lg:mb-16">
           <h2 className="mb-4 text-3xl tracking-tight font-extrabold text-gray-900">
           Discover Our Key Features

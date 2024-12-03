@@ -63,16 +63,17 @@ const Blog = () => {
           <span className="flex gap-2">
             <button
               onClick={toggleReviewModal}
-              className="font-medium rounded-lg text-sm p-2 py-0 sm:py-2 hover:bg-blue-600 hover:text-white shadow-lg border-2"
+              className="font-medium rounded-lg text-sm p-2 py-2 hover:bg-blue-600 hover:text-white shadow-lg border-2 hover:border-blue-600"
             >
               Write a review
             </button>
             <a
+              id="seeReviews"
               href="#reviews"
               onClick={() => {
-                setreviewToggle(!reviewToggle);
+                setreviewToggle(true);
               }}
-              className="font-medium rounded-lg text-sm p-2 py-0 sm:py-2 hover:bg-blue-600 hover:text-white shadow-lg border-2"
+              className="font-medium rounded-lg text-sm p-2 py-2 hover:bg-blue-600 hover:text-white shadow-lg border-2 hover:border-blue-600"
             >
               See reviews
             </a>
@@ -105,50 +106,54 @@ const Blog = () => {
           )}
           <p className="mb-4 font-medium">Blog Id: {blog.id}</p>
         </div>
-        {reviewToggle && (
-          <div className="my-10">
-            <div className="flex justify-between">
-              <p className="font-semibold text-[1.5rem] m-2">Reviews :</p>
-              <Link
-                id="reviews"
-                onClick={() => {
-                  setreviewToggle(!reviewToggle);
-                }}
-                className="font-medium rounded-lg text-sm p-2 hover:bg-blue-600 hover:text-white shadow-lg border-2 h-10"
-              >
-                {!reviewToggle ? "see" : "close"} reviews
-              </Link>
-            </div>
-            {blog.ratings.length?blog.ratings.map((rating, index) => {
-              return (
-                <div
-                  className="shadow-lg drop-shadow-xl flex flex-col sm:flex-row mb-6 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 h-fit w-fit justify-center sm:items-center max-w-5xl min-w-full sm:min-w-0"
-                  key={index}
-                >
-                  <img
-                    className="shrink-0 rounded-2xl h-24 w-24 object-left-top object-cover m-2"
-                    src={rating.raterImg}
-                    alt={`${rating.raterName}'s Avatar`}
-                  />
-                  <div className="flex flex-col justify-center gap-2 p-4">
-                    <p>
-                      <span className="font-semibold">Name :</span>{" "}
-                      {rating.raterName}
-                    </p>
-                    <p className="text-justify">
-                      <span className="font-semibold">Message :</span>{" "}
-                      {rating.message}
-                    </p>
-                    <div className="flex">
-                      <span className="font-semibold">Rating : </span>
-                      <Rating style={{ maxWidth: 100 }} value={rating.rating} />
+
+        <div className="my-10">
+          <Link
+            id="reviews"
+            onClick={() => {
+              setreviewToggle(!reviewToggle);
+            }}
+            className="font-medium rounded-lg text-sm p-2 hover:bg-blue-600 hover:border-blue-600 hover:text-white shadow-lg border-2 h-10 scroll-mt-28"
+          >
+            {!reviewToggle ? "see" : "close"} reviews
+          </Link>
+          {reviewToggle &&
+            (blog.ratings.length ? (
+              blog.ratings.map((rating, index) => {
+                return (
+                  <div key={index}>
+                    <p className="font-semibold text-[1.5rem] m-2">Reviews :</p>
+                    <div className="shadow-lg drop-shadow-xl flex flex-col sm:flex-row mb-6 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 h-fit w-fit justify-center sm:items-center max-w-5xl min-w-full sm:min-w-0">
+                      <img
+                        className="shrink-0 rounded-2xl h-24 w-24 object-left-top object-cover m-2"
+                        src={rating.raterImg}
+                        alt={`${rating.raterName}'s Avatar`}
+                      />
+                      <div className="flex flex-col justify-center gap-2 p-4">
+                        <p>
+                          <span className="font-semibold">Name :</span>{" "}
+                          {rating.raterName}
+                        </p>
+                        <p className="text-justify">
+                          <span className="font-semibold">Message :</span>{" "}
+                          {rating.message}
+                        </p>
+                        <div className="flex">
+                          <span className="font-semibold">Rating : </span>
+                          <Rating
+                            style={{ maxWidth: 100 }}
+                            value={rating.rating}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            }):<p className="m-2">No reviews</p>}
-          </div>
-        )}
+                );
+              })
+            ) : (
+              <p className="m-2">No reviews</p>
+            ))}
+        </div>
       </div>
     </section>
   );

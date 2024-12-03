@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className="h-fit">
       <Hero />
-      <BlogList />
+      <BlogList limit={6}/>
       <Features />
     </div>
   );
