@@ -266,8 +266,8 @@ const SignUp = () => {
                     value={formik.values.profession}
                   >
                     <option value="">--Please choose an option--</option>
-                    {professions.sort().map((profession) => (
-                      <option value={`${profession}`}>
+                    {professions.sort().map((profession,index) => (
+                      <option key={index} value={`${profession}`}>
                         {profession.split("-").join(" ")}
                       </option>
                     ))}

@@ -75,7 +75,7 @@ const SingleCard = ({ Button, CardTitle, Href, type }) => {
   return (
     <>
       {/*  */}
-      <div className="mb-10 rounded-lg bg-white shadow-md">
+      <div className="mb-10 rounded-3xl bg-white shadow-md">
         <Link
           to={`/Categories/${type == "user" ? "Authors" : "Blogs"}/${Href}`}
           className="flex items-center justify-center flex-col p-4"

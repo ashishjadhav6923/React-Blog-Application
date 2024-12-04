@@ -166,8 +166,8 @@ const BlogWritingForm = () => {
                 placeholder="category"
               >
                 <option value={null}>--Please choose an option--</option>
-                {blogCategories.sort().map((profession) => (
-                  <option value={`${profession}`}>
+                {blogCategories.sort().map((profession,index) => (
+                  <option key={index} value={`${profession}`}>
                     {profession.split("-").join(" ")}
                   </option>
                 ))}
