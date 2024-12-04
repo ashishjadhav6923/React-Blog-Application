@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BlogCard from "./BlogCard";
 import { useParams } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const BlogList = ({ limit }) => {
   const [fetchedBlogs, setFetchedBlogs] = useState([]);
@@ -13,7 +14,7 @@ const BlogList = ({ limit }) => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await axios.get(
           `${import.meta.env.VITE_API_PATH}/api/user/getBlogs${param.category ? "/" + param.category : ""}`
         );
@@ -33,15 +34,19 @@ const BlogList = ({ limit }) => {
   if (error) return <p>{error}</p>;
 
   const blogs = [...fetchedBlogs].reverse();
-  const topRatedBlogs = [...fetchedBlogs].sort((a, b) => b.averageRating - a.averageRating);
+  const topRatedBlogs = [...fetchedBlogs].sort(
+    (a, b) => b.averageRating - a.averageRating
+  );
 
   return (
     <div className="max-w-screen-xl mx-auto">
-      <div className="flex items-center gap-4 justify-between">
+      <div className="flex flex-wrap items-center gap-4 justify-between">
         <h1 className="text-3xl tracking-tight font-extrabold text-gray-900 mb-4">
           {`Blogs ${param.category ? "of " + param.category : ""}`}
         </h1>
-
+        <div className="sm:block hidden">
+          <SearchBar data={fetchedBlogs} type={"blog"} />
+        </div>
         <div className="inline-flex rounded-md shadow-sm my-2" role="group">
           <button
             onClick={() => {
@@ -66,6 +71,9 @@ const BlogList = ({ limit }) => {
             Top Rated
           </button>
         </div>
+      </div>
+      <div className="sm:hidden block">
+        <SearchBar data={fetchedBlogs} type={"blog"} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {fetchedBlogs && fetchedBlogs.length > 0 ? (
