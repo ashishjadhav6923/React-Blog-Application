@@ -5,8 +5,7 @@ import { useParams } from "react-router-dom";
 import SearchBar from "./SearchBar";
 
 const AuthorsList = () => {
-  const [authors, setAuthors] = useState([]);
-  const [topRatedAuthors, settopRatedAuthors] = useState([]);
+  const [fetchedAuthors, setfetchedAuthors] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [topRatedFilter, setTopRatedFilter] = useState(false);
@@ -18,11 +17,7 @@ const AuthorsList = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_API_PATH}/api/user/authors${param.category ? "/" + param.category : ""}`
         );
-        const fetchedAuthors = response.data.authors;
-        setAuthors([...fetchedAuthors].reverse());
-        settopRatedAuthors(
-          [...fetchedAuthors].sort((a, b) => b.averageRating - a.averageRating)
-        );
+        setfetchedAuthors(response?.data?.authors || []);
       } catch (error) {
         setError("Error fetching authors");
         console.error(error);
@@ -37,6 +32,10 @@ const AuthorsList = () => {
   if (loading)
     return <p className="max-w-screen-xl mx-auto min-h-96">Loading...</p>;
   if (error) return <p>{error}</p>;
+  const authors = [...fetchedAuthors].reverse();
+  const topRatedAuthors = [...authors].sort(
+    (a, b) => b.averageRating - a.averageRating
+  );
 
   return (
     <div className="max-w-screen-xl mx-auto min-h-96">
@@ -72,34 +71,36 @@ const AuthorsList = () => {
         <SearchBar data={authors} type={"author"} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 ">
-        {!topRatedFilter && authors
-          ? authors.map((author, index) => (
-              <AuthorCard
-                key={index}
-                name={author.name}
-                username={author.username}
-                profession={author.profession}
-                image={author.img}
-                blogs={author.blogs}
-                averageRating={author.averageRating}
-              />
-            ))
-          : !topRatedFilter &&
-            `Authors with profession ${param.category} not found`}
-        {topRatedFilter && authors
-          ? topRatedAuthors.map((author, index) => (
-              <AuthorCard
-                key={index}
-                name={author.name}
-                username={author.username}
-                profession={author.profession}
-                image={author.img}
-                blogs={author.blogs}
-                averageRating={author.averageRating}
-              />
-            ))
-          : topRatedFilter &&
-            `Authors with profession ${param.category} not found`}
+        {authors && authors.length > 0 ? (
+          <>
+            {!topRatedFilter &&
+              authors.map((author, index) => (
+                <AuthorCard
+                  key={index}
+                  name={author.name}
+                  username={author.username}
+                  profession={author.profession}
+                  image={author.img}
+                  blogs={author.blogs}
+                  averageRating={author.averageRating}
+                />
+              ))}
+            {topRatedFilter &&
+              topRatedAuthors.map((author, index) => (
+                <AuthorCard
+                  key={index}
+                  name={author.name}
+                  username={author.username}
+                  profession={author.profession}
+                  image={author.img}
+                  blogs={author.blogs}
+                  averageRating={author.averageRating}
+                />
+              ))}
+          </>
+        ) : (
+          <p className="">Authors not available for this category.</p>
+        )}
       </div>
     </div>
   );
