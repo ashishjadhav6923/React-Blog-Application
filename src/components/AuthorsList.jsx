@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import AuthorCard from "./AuthorCard";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { BsArrowRight } from "react-icons/bs";
 
-const AuthorsList = () => {
+const AuthorsList = ({ limit }) => {
   const [fetchedAuthors, setfetchedAuthors] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -74,34 +75,48 @@ const AuthorsList = () => {
         {authors && authors.length > 0 ? (
           <>
             {!topRatedFilter &&
-              authors.map((author, index) => (
-                <AuthorCard
-                  key={index}
-                  name={author.name}
-                  username={author.username}
-                  profession={author.profession}
-                  image={author.img}
-                  blogs={author.blogs}
-                  averageRating={author.averageRating}
-                />
-              ))}
+              authors
+                .slice(0, limit || authors.length)
+                .map((author, index) => (
+                  <AuthorCard
+                    key={index}
+                    name={author.name}
+                    username={author.username}
+                    profession={author.profession}
+                    image={author.img}
+                    blogs={author.blogs}
+                    averageRating={author.averageRating}
+                  />
+                ))}
             {topRatedFilter &&
-              topRatedAuthors.map((author, index) => (
-                <AuthorCard
-                  key={index}
-                  name={author.name}
-                  username={author.username}
-                  profession={author.profession}
-                  image={author.img}
-                  blogs={author.blogs}
-                  averageRating={author.averageRating}
-                />
-              ))}
+              topRatedAuthors
+                .slice(0, limit || authors.length)
+                .map((author, index) => (
+                  <AuthorCard
+                    key={index}
+                    name={author.name}
+                    username={author.username}
+                    profession={author.profession}
+                    image={author.img}
+                    blogs={author.blogs}
+                    averageRating={author.averageRating}
+                  />
+                ))}
           </>
         ) : (
           <p className="">Authors not available for this category.</p>
         )}
       </div>
+      {limit && (
+        <NavLink
+          to="/Authors"
+          className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-gray-900 rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 my-4"
+        >
+          <span className="flex items-center justify-center gap-4">
+            See all <BsArrowRight />
+          </span>
+        </NavLink>
+      )}
     </div>
   );
 };
