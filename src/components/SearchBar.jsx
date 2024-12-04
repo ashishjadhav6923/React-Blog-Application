@@ -10,7 +10,7 @@ const SearchBar = ({ data,type }) => {
     if (!query) return [];
     if(type=='author'){
         return items.filter((item) =>
-          item.username.toLowerCase().includes(query?.toLowerCase())
+          item.name.toLowerCase().includes(query?.toLowerCase())
         );
     }
     if(type=='blog'){
