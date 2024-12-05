@@ -21,7 +21,7 @@ const LogIn = () => {
   });
 
   return (
-    <section className="bg-gray-50 max-w-screen-xl mx-auto min-h-96">
+    <section className="max-w-screen-xl mx-auto min-h-96">
       <div className="py-8 flex flex-col items-center justify-center">
         <a
           href="#"
@@ -86,7 +86,7 @@ const LogIn = () => {
                       className="block mb-2 text-sm font-medium text-gray-900"
                       htmlFor="username"
                     >
-                      Your email / Username
+                      Username
                     </label>
                     <Field
                       className={`bg-gray-50 border ${
@@ -138,7 +138,7 @@ const LogIn = () => {
                     </div>
                   )}
 
-                  <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center justify-between">
                     <div className="flex items-start">
                       <div className="flex items-center h-5">
                         <Field
@@ -161,7 +161,7 @@ const LogIn = () => {
                     >
                       Forgot password?
                     </a>
-                  </div>
+                  </div> */}
                   <button
                     type="submit"
                     className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"

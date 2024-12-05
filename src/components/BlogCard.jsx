@@ -13,7 +13,7 @@ const BlogCard = ({ title, author, username, id, rating }) => {
           <span className="mr-1">
             <FaStar />
           </span>
-          {rating}/5
+          {rating?rating:'00'}/5
         </p>
       </div>
     </Link>

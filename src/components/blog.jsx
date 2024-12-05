@@ -125,13 +125,15 @@ const Blog = () => {
           >
             {!reviewToggle ? "see" : "close"} reviews
           </Link>
+          {reviewToggle && (
+            <p className="font-semibold text-[1.5rem] m-2">Reviews :</p>
+          )}
           {reviewToggle &&
             (blog.ratings.length ? (
               blog.ratings.map((rating, index) => {
                 return (
                   <div key={index}>
-                    <p className="font-semibold text-[1.5rem] m-2">Reviews :</p>
-                    <div className="shadow-lg drop-shadow-xl flex flex-col sm:flex-row mb-6 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 h-fit w-fit justify-center sm:items-center max-w-5xl min-w-full sm:min-w-0">
+                    <div className="my-4 shadow-lg drop-shadow-xl flex flex-col sm:flex-row mb-6 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 h-fit w-fit justify-center sm:items-center max-w-5xl min-w-full sm:min-w-0">
                       <img
                         className="shrink-0 rounded-2xl h-24 w-24 object-left-top object-cover m-2"
                         src={rating.raterImg}

@@ -7,7 +7,7 @@ const AuthorCard = ({ image, name, profession, username, averageRating }) => {
     <div className="border rounded-lg shadow-md p-4 h-full w-full">
       <div className="flex flex-col items-center py-10">
         <img
-          className="w-24 h-24 mb-3 rounded-full shadow-lg"
+          className="w-24 h-24 mb-3 rounded-full shadow-lg object-cover"
           src={image}
           alt={`${name} image`}
         />

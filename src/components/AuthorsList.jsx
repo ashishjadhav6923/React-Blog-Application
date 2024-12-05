@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AuthorCard from "./AuthorCard";
 import axios from "axios";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import { BsArrowRight } from "react-icons/bs";
 
@@ -11,7 +11,7 @@ const AuthorsList = ({ limit }) => {
   const [loading, setLoading] = useState(true);
   const [topRatedFilter, setTopRatedFilter] = useState(false);
   const param = useParams();
-
+  const { pathname } = useLocation();
   useEffect(() => {
     const fetchAuthors = async () => {
       try {
@@ -28,7 +28,7 @@ const AuthorsList = ({ limit }) => {
     };
 
     fetchAuthors();
-  }, []);
+  }, [pathname]);
 
   if (loading)
     return <p className="max-w-screen-xl mx-auto min-h-96">Loading...</p>;
