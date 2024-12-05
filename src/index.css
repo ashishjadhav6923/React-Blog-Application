@@ -9,3 +9,9 @@
 ::-webkit-scrollbar {
   width: 6px;
 }
+
+.custom-div > ol {
+  list-style: disc !important;
+  margin: 0 2rem 0 2rem !important;
+  padding: 0 !important;
+}

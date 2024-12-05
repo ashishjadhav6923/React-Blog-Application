@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios"; // Make sure to import axios
 import { CgProfile } from "react-icons/cg";
 import ReviewModal from "./ReviewModal";
-import { HiMail } from "react-icons/hi";
 import { FaStar } from "react-icons/fa6";
-import { FaUserCircle } from "react-icons/fa";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
 const Blog = () => {
   const [blog, setBlog] = useState(null);
+  const contentDiv = useRef();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { blogId } = useParams();
   const [toggleReview, settoggleReview] = useState(false);
   const [reviewToggle, setreviewToggle] = useState(false);
+
   const toggleReviewModal = () => {
     settoggleReview(!toggleReview);
   };
+
   useEffect(() => {
     const fetchBlog = async () => {
       try {
@@ -36,6 +37,12 @@ const Blog = () => {
 
     fetchBlog();
   }, [blogId]);
+
+  useEffect(() => {
+    if (blog && contentDiv.current) {
+      contentDiv.current.innerHTML = blog.content; // Safely set content once blog data is available
+    }
+  }, [blog]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -83,7 +90,6 @@ const Blog = () => {
           <h2 className="mb-4 text-4xl tracking-tight font-bold text-gray-900 whitespace-pre-wrap">
             {blog.title}
           </h2>
-
           <Link
             to={`/Authors/profile/${blog.username}`}
             className="block w-fit"
@@ -96,9 +102,11 @@ const Blog = () => {
               </span>
             </div>
           </Link>
-          <p className="mb-4 font-medium whitespace-pre-wrap text-justify overflow-scroll">
-            {blog.content}
-          </p>
+          <div
+            className="mb-4 font-medium whitespace-pre-wrap text-justify overflow-scroll custom-div"
+            ref={contentDiv}
+          ></div>{" "}
+          {/* Render the HTML content here */}
           {blog.additionalInfo && (
             <p className="mb-4 inline-flex items-center font-medium whitespace-pre-wrap">
               Additional info: {blog.additionalInfo}
