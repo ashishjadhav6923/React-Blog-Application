@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { blogCategories, professions } from "../constants/constants";
 import { Link } from "react-router-dom";
+import SearchBarCategories from "./SearchBarCategories";
 
 const Categories = () => {
   const [blogFilter, setblogFilter] = useState(false);
@@ -10,6 +11,12 @@ const Categories = () => {
         <p className="text-3xl tracking-tight font-extrabold text-gray-900 mb-4">
           Categories
         </p>
+        <div className="sm:block hidden">
+          <SearchBarCategories
+            data={blogFilter ? blogCategories : professions}
+            type={blogFilter ? "blog" : "author"}
+          />
+        </div>
         <div className="inline-flex rounded-md shadow-sm my-2" role="group">
           <button
             onClick={() => {
@@ -30,6 +37,12 @@ const Categories = () => {
             Blogs
           </button>
         </div>
+      </div>
+      <div className="sm:hidden block">
+        <SearchBarCategories
+          data={blogFilter ? blogCategories : professions}
+          type={blogFilter ? "blog" : "author"}
+        />
       </div>
       <section className="">
         <div className="container">
